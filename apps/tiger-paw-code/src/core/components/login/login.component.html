@@ -1,4 +1,4 @@
-<mat-card>
+<!-- <mat-card>
   <div class="alert alert-danger" role="alert" *ngIf="message">
     {{ message }}
   </div>
@@ -20,4 +20,12 @@
     </a>
   </form>
 
-</mat-card>
+</mat-card> -->
+
+<div *ngIf='user; else login'>
+  {{ user.username }}
+</div>
+
+<ng-template #login>
+  Login
+</ng-template>
