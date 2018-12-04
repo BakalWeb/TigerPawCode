@@ -27,19 +27,25 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.scss"
+              "./src/core/scss/global.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./src/core/scss"
+              ]
+            },
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+            ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -49,13 +55,11 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
             }
           }
         },
@@ -84,10 +88,13 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.scss"
+              "./src/core/scss/global.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

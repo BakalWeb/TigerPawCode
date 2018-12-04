@@ -1,16 +1,58 @@
 <mat-sidenav-container class="sidebar-container">
-    <mat-sidenav #sidenav mode="over" autoFocus="true" closedStart="false" class="sidebar">
-        <button mat-button class="sidebar-close" (click)="sidenav.toggle()">
-            <mat-icon>close</mat-icon>
-          </button>
-        <hr/>
-          <app-sidebar></app-sidebar>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="content-container">
-      <p><button mat-button class="sidebar-toggle" (click)="sidenav.toggle()">
-        <mat-icon>more_vert</mat-icon>
+  <mat-sidenav #sidenav mode="side" opened="true" disableClose="true" closedStart="false" autoFocus="true" class="sidebar">
+    <p class="text-right">
+      <button mat-button class="sidebar-close" (click)="sidenav.toggle()">
+        <span aria-label="Close Sidebar menu"></span>
+        <mat-icon>close</mat-icon>
       </button></p>
+
+    <a [routerLink]="['home']">
+      <img src="https://www.fillmurray.com/140/100" alt="TigerPawCode logo" class="logo" />
+    </a>
+    <hr />
+
+    <ul class="sidebar-menu">
+      <li *ngFor="let item of menuItems" class="sidebar-item">
+        <a [routerLink]="item.routerLink" routerLinkActive="active" class="sidebar-link" matRipple>
+          <mat-icon class="icon sidebar-icon">{{ item.icon }}</mat-icon>
+          <span class="link">{{ item.display }}</span>
+        </a>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content-container">
+    <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <h2 class="page-name">{{ currentLocation | titlecase }}</h2>
+      </div>
+      <div class="col"> 
+          <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-item nav-link" href="#">Features</a>
+                  <a class="nav-item nav-link" href="#">Pricing</a>
+                  <button mat-button class="nav-item nav-link" (click)="sidenav.toggle()">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+              </div>
+            </nav> -->
+            <app-login></app-login>
+            <p class="text-right">
+              <button mat-button class="nav-item nav-link" (click)="sidenav.toggle()">
+                  <mat-icon>more_vert</mat-icon>
+              </button>
+          </p>
+      </div>
+    </div>
+  </div>
     <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

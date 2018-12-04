@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +8,15 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   message: string;
-
+ user: any;
   constructor(public authService: AuthService) {
     this.message = '';
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = this.authService.getUser();
+   }
+
 
   login(username: string, password: string): boolean {
     this.message = '';

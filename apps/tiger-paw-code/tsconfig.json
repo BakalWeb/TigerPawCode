@@ -1,7 +1,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@env/*": ["environments/*"],
+      "@core/*": ["core/*"],
+      },
     "outDir": "./public",
     "sourceMap": true,
     "declaration": false,

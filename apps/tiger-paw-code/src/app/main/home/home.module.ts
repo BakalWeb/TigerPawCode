@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './containers/home/home.component';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from 'src/app/core/components/login/login.component';
-import { MaterialModule } from 'src/app/core/modules/material.module';
+import { MaterialModule } from '@core/modules/material.module';
+import { LoginComponent } from '@core/components/login/login.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, MaterialModule],
