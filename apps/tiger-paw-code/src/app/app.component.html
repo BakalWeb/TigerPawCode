@@ -1,0 +1,16 @@
+<mat-sidenav-container class="sidebar-container">
+    <mat-sidenav #sidenav mode="over" autoFocus="true" closedStart="false" class="sidebar">
+        <button mat-button class="sidebar-close" (click)="sidenav.toggle()">
+            <mat-icon>close</mat-icon>
+          </button>
+        <hr/>
+          <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content-container">
+      <p><button mat-button class="sidebar-toggle" (click)="sidenav.toggle()">
+        <mat-icon>more_vert</mat-icon>
+      </button></p>
+    <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
