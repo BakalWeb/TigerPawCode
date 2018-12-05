@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: './main/admin/admin.module#AdminModule',
     canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'profile',
+    loadChildren: './main/profile/profile.module#ProfileModule',
+    canActivate: [LoggedInGuard]
   }
   ];
 

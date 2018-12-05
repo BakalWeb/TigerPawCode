@@ -7,6 +7,6 @@ import { MaterialModule } from '@core/modules/material.module';
 @NgModule({
   imports: [CommonModule, RouterModule, MaterialModule],
   declarations: [HomeComponent],
-  exports: [HomeComponent]
+  exports: []
 })
 export class HomeModule {}

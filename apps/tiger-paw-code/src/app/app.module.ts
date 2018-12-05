@@ -19,7 +19,11 @@ import { UserService } from '@core/services/user.service';
 import { ProtectedComponent } from './main/protected/protected/protected.component';
 
 @NgModule({
-  declarations: [AppComponent, EscapeHtmlPipe, ProtectedComponent],
+  declarations: [
+    AppComponent,
+    EscapeHtmlPipe,
+    ProtectedComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,9 +35,14 @@ import { ProtectedComponent } from './main/protected/protected/protected.compone
     FormsModule,
     ReactiveFormsModule,
     CommonComponentsModule,
-    InMemoryWebApiModule.forRoot(FakeApiService),
+    InMemoryWebApiModule.forRoot(FakeApiService)
   ],
-  providers: [AuthService, AUTH_PROVIDERS, LoggedInGuard, UserService],
+  providers: [
+    AuthService,
+    AUTH_PROVIDERS,
+    LoggedInGuard,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
