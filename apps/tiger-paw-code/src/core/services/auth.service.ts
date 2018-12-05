@@ -1,28 +1,40 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
+import { User } from '@core/models/user';
+import { of, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  login(user: string, password: string): boolean {
-    if (user === 'user' && password === 'password') {
-      localStorage.setItem('username', user);
+  private loggedIn = new BehaviorSubject<boolean>(false);
+
+  constructor(private userService: UserService) {  }
+
+  login(username: string, password: string): boolean {
+    if (username === 'adamb' && password === 'password') {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('userId', '1');
+      this.loggedIn.next(true);
       return true;
     }
 
+    this.loggedIn.next(false);
     return false;
   }
 
   logout(): any {
-    localStorage.removeItem('username');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userId');
   }
 
-  getUser(): any {
-    return localStorage.getItem('username');
+  isLoggedInStream(): Observable<boolean> {
+    this.loggedIn.next(this.isLoggedIn());
+    return this.loggedIn.asObservable();
   }
 
   isLoggedIn(): boolean {
-    return this.getUser() !== null;
+    return localStorage.getItem('loggedIn') != null ? true : false;
   }
 }
 

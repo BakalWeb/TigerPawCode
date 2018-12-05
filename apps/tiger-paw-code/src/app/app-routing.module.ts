@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './main/home/containers/home/home.component';
-import { ProtectedComponent } from '@core/components/protected/protected.component';
 import { LoggedInGuard } from '@core/guards/logged-in.guard';
+import { ProtectedComponent } from './main/protected/protected/protected.component';
 
 const routes: Routes = [
   {
@@ -15,8 +15,21 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'login',
+    loadChildren: './main/login/login.module#LoginModule'
+  },
+  {
+    path: 'blog',
+    loadChildren: './main/blog/blog.module#BlogModule'
+  },
+  {
     path: 'protected',
     component: ProtectedComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: './main/admin/admin.module#AdminModule',
     canActivate: [LoggedInGuard]
   }
   ];

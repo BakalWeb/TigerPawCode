@@ -22,10 +22,10 @@
 
 </mat-card> -->
 
-<div *ngIf='user; else login'>
-  {{ user.username }}
+<div *ngIf='loggedIn && user; else login'>
+  {{ user.username }} <a href="home" (click)="logout()">logout</a>
 </div>
 
 <ng-template #login>
-  Login
+    <button mat-button [routerLink]="['login']">Login</button>
 </ng-template>
