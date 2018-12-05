@@ -1,39 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { User } from '@core/models/user';
+import { UserService } from '@core/services/user.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-header',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginHeaderComponent implements OnInit {
   message: string;
- user: any;
-  constructor(public authService: AuthService) {
+  user: User;
+  loggedIn = false;
+
+  constructor(
+    public userService: UserService,
+    private authService: AuthService
+  ) {
     this.message = '';
   }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
-   }
-
-
-  login(username: string, password: string): boolean {
-    this.message = '';
-    if (!this.authService.login(username, password)) {
-      this.message = 'Incorrect credentials.';
-      setTimeout(
-        function() {
-          this.message = '';
-        }.bind(this),
-        2500
-      );
-    }
-    return false;
+    this.authService.isLoggedInStream().subscribe((value: any) => {
+      this.loggedIn = value;
+      if (value) {
+        const userId = +localStorage.getItem('userId');
+        this.userService.getUserById(userId).subscribe( res => {
+          this.user = res;
+        }, error => {
+          console.log(error);
+        });
+      }
+    });
   }
 
-  logout(): boolean {
+  logout(): void {
     this.authService.logout();
-    return false;
   }
 }

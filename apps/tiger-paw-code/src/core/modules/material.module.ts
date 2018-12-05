@@ -34,6 +34,7 @@ import { NgModule } from '@angular/core';
       MatStepperModule
   } from '@angular/material';
   import { CdkTableModule } from '@angular/cdk/table';
+  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -69,7 +70,9 @@ import { NgModule } from '@angular/core';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        CdkTableModule
+        CdkTableModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     exports: [
         MatAutocompleteModule,
@@ -103,10 +106,9 @@ import { NgModule } from '@angular/core';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        CdkTableModule
+        CdkTableModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
-export class MaterialModule
-{
-
-}
+export class MaterialModule { }

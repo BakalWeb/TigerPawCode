@@ -17,4 +17,20 @@ export const MenuItems: MenuItem[] = [
     protected: true,
     sidenav: true
   },
+  {
+    display: 'Admin',
+    routerLink: 'admin',
+    index: 2,
+    icon: 'perm_data_setting',
+    protected: true,
+    sidenav: true
+  },
+  {
+    display: 'Blog',
+    routerLink: 'blog',
+    index: 3,
+    icon: 'note',
+    protected: false,
+    sidenav: true
+  },
 ];

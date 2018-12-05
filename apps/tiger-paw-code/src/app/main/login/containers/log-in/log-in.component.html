@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row row-eq-height">
+    <div class="col-sm-6">
+      <mat-card class="col">
+        <form [formGroup]='loginForm' (ngSubmit)="logIn()">
+          <mat-form-field class="max-width">
+            <input matInput placeholder="Username" formControlName='username' autocomplete="username">
+          </mat-form-field>
+
+          <mat-form-field class="max-width">
+            <input matInput placeholder="Password" formControlName='password' type="password" autocomplete="current-password">
+          </mat-form-field>
+
+          <mat-checkbox formControlName='rememberMe'>Stay signed in</mat-checkbox>
+
+          <hr />
+          <div class="max-width">
+            <button mat-raised-button type="submit" class="primary">Log In</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+
+    <div class="col-sm-6">
+        <mat-card class="col max-height">
+        Register
+      </mat-card>
+    </div>
+  </div>
+</div>

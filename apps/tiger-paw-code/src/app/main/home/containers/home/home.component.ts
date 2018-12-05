@@ -8,17 +8,7 @@ import { AuthService } from '@core/services/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  showLogin: false;
-  user: User;
-  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.user = new User();
-    this.user.username = this.authService.getUser();
   }
-
-  logout(): void {
-    this.authService.logout();
-  }
-
 }
