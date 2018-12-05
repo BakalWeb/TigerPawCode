@@ -33,4 +33,12 @@ export const MenuItems: MenuItem[] = [
     protected: false,
     sidenav: true
   },
+  {
+    display: 'Profile',
+    routerLink: 'profile',
+    index: 4,
+    icon: 'person',
+    protected: true,
+    sidenav: true
+  },
 ];

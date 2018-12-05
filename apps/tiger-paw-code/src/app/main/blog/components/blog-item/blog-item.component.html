@@ -1,0 +1,37 @@
+<div class="container blogs">
+  <mat-card *ngIf='blog'>
+    <mat-card-header>
+      <mat-card-title>{{ blog.headline }}</mat-card-title>
+      <mat-card-subtitle>{{ blog.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="">
+        <span class="small">{{ blog.author | titlecase }}</span>
+        <span class="small posted-date"> - {{ blog.dateCreated | date: 'yyyy-MM-dd hh:mm' }}</span>
+        <br />
+        <span class="small">Estimated reading time: {{ blog.estimatedReadingTime / 60 * 100 | number: '0.2-2' }}
+          minutes</span>
+      </p>
+      <p class="small"></p>
+      <img [src]="blog.thumbnail" class="rounded float-left" alt="{{ blog.headline }}" />
+      <div class="float-left content">
+        <div [innerHTML]="blog.content"></div>
+      </div>
+
+      <div class="clearfix"></div>
+    </mat-card-content>
+    <mat-card-actions *ngIf='!loadingBlogNav'>
+      <div class="row">
+        <div class="col-4">
+          <button mat-raised-button [routerLink]="['../', previousId]" type="submit" class="btn-block" [class.disable]="previousId === 0"><</button>
+        </div>
+        <div class="col-4">
+          <button mat-raised-button [routerLink]="['../']" class="btn-block">Back</button>
+        </div>
+        <div class="col-4">
+          <button mat-raised-button [routerLink]="['../', nextId]" class="btn-block" [class.disable]="previousId === 0">></button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

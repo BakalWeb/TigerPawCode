@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component} from '@angular/core';
 import { MenuItems } from '@core/static/menu';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
