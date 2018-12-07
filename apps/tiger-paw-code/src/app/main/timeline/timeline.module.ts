@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './containers/profile/profile.component';
-import { RouterModule, Route } from '@angular/router';
 import { MaterialModule } from '@core/modules/material.module';
+import { RouterModule, Route } from '@angular/router';
+import { TimelineComponent } from './containers/timeline/timeline.component';
 
 const routes: Route[] = [
-  {
-    path: '',
-    component: ProfileComponent
-  }
+{
+  path: '',
+  component: TimelineComponent
+}
 ];
 
 @NgModule({
@@ -17,9 +17,9 @@ const routes: Route[] = [
     MaterialModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ProfileComponent],
+  declarations: [TimelineComponent],
   exports: [
     RouterModule
   ]
 })
-export class ProfileModule { }
+export class TimelineModule { }

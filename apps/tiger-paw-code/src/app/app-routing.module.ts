@@ -36,7 +36,11 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: './main/profile/profile.module#ProfileModule',
     canActivate: [LoggedInGuard]
-  }
+  },
+  {
+    path: 'timeline',
+    loadChildren: './main/timeline/timeline.module#TimelineModule',
+    canActivate: [LoggedInGuard]
   ];
 
 @NgModule({
