@@ -41,4 +41,12 @@ export const MenuItems: MenuItem[] = [
     protected: true,
     sidenav: true
   },
+  {
+    display: 'Timeline',
+    routerLink: 'timeline',
+    index: 5,
+    icon: 'timeline',
+    protected: true,
+    sidenav: true
+  },
 ];

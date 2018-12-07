@@ -71,3 +71,17 @@
     text-align: left;
   }
 }
+
+/*
+footer {
+  background: $primary-green;
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  bottom: -50px;
+  transform: rotate(1deg);
+  -webkit-clip-path: polygon(0 67%,100% 29%,100% 86%,0 100%);
+  clip-path: polygon(0 67%,100% 29%,100% 86%,0 100%);
+  z-index: 9999;
+}
+*/

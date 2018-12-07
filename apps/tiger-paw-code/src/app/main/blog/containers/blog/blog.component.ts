@@ -28,8 +28,4 @@ export class BlogComponent implements OnInit {
       console.log(error);
     });
   }
-
-  handler($event) {
-    console.log(event)
-  }
 }
