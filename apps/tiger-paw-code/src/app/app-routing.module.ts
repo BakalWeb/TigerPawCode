@@ -41,6 +41,12 @@ const routes: Routes = [
     path: 'timeline',
     loadChildren: './main/timeline/timeline.module#TimelineModule',
     canActivate: [LoggedInGuard]
+  },
+  {
+    path: 'messages',
+    loadChildren: './main/messages/messages.module#MessagesModule',
+    canActivate: [LoggedInGuard]
+  }
   ];
 
 @NgModule({

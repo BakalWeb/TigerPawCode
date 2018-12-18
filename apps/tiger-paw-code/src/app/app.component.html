@@ -45,8 +45,9 @@
               </div>
             </nav> -->
 
-            <div class="btn-group align-right" role="group" aria-label="Basic example">
+            <div class="btn-group align-right top-nav-buttons" role="group">
                 <app-login-header *ngIf="currentLocation !== 'login'"></app-login-header>
+                <app-message-chip></app-message-chip>
                 <button mat-button class="nav-item nav-link" (click)="sidenav.toggle()">
                     <mat-icon>more_vert</mat-icon>
                 </button>

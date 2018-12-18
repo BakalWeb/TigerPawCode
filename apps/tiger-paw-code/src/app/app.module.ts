@@ -22,7 +22,7 @@ import { ProtectedComponent } from './main/protected/protected/protected.compone
   declarations: [
     AppComponent,
     EscapeHtmlPipe,
-    ProtectedComponent
+    ProtectedComponent,
   ],
   imports: [
     BrowserModule,

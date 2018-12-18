@@ -1,0 +1,11 @@
+.unread-message {
+  font-weight: bold;
+}
+
+.message-row {
+
+  &:hover, &:active, &:focus {
+    cursor: pointer;
+    background: #eee;
+  }
+}
