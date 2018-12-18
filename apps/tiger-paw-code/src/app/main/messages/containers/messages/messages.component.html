@@ -1,0 +1,30 @@
+<div class="container">
+
+  <ng-container *ngIf='dataSource && dataSource.data.length > 0'>
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+          <ng-container cdkColumnDef="datecreated">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Received </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{row.dateCreated | date: 'yyyy-MM-dd hh:mm:ss'}} </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="subject">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Subject </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{ row.subject }} </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="sender">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> From </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{ row.sender }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)='messageSelected(row)'
+          [class.unread-message]="row.dateRead === null"
+          class="message-row"></mat-row>
+          </mat-table>
+  </ng-container>
+
+
+
+</div>

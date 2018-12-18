@@ -23,6 +23,10 @@ export class AuthService {
     return false;
   }
 
+  getLoggedInUserId(): number {
+    return localStorage.getItem('userId') != null ? + localStorage.getItem('userId') :  0;
+  }
+
   logout(): any {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('userId');

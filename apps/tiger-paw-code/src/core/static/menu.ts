@@ -49,4 +49,12 @@ export const MenuItems: MenuItem[] = [
     protected: true,
     sidenav: true
   },
+  {
+    display: 'Messages',
+    routerLink: 'messages',
+    index: 6,
+    icon: 'message',
+    protected: true,
+    sidenav: true
+  },
 ];
