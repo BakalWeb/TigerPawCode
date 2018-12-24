@@ -2,15 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { User } from '@core/models/user';
 import { UserService } from '@core/services/user.service';
+import { UserLogin } from '@core/models/user-login';
 
 @Component({
   selector: 'app-login-header',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  template: `
+    <div *ngIf="loggedIn && user; else: login">
+      {{ user.username }} <a href="home" (click)="logout()">Logout</a>
+    </div>
+
+    <ng-template #login>
+      <button mat-button [routerLink]="['login']">Login</button>
+    </ng-template>
+  `
 })
 export class LoginHeaderComponent implements OnInit {
   message: string;
-  user: User;
+  user: UserLogin;
   loggedIn = false;
 
   constructor(
@@ -21,17 +30,8 @@ export class LoginHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.isLoggedInStream().subscribe((value: any) => {
-      this.loggedIn = value;
-      if (value) {
-        const userId = +localStorage.getItem('userId');
-        this.userService.getUserById(userId).subscribe( res => {
-          this.user = res;
-        }, error => {
-          console.log(error);
-        });
-      }
-    });
+    this.user = this.authService.currentUserValue;
+    this.loggedIn = this.authService.currentUserValue ? true : false;
   }
 
   logout(): void {

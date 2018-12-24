@@ -10,14 +10,6 @@ export const MenuItems: MenuItem[] = [
     sidenav: true
   },
   {
-    display: 'Protected',
-    routerLink: 'protected',
-    index: 1,
-    icon: 'lock',
-    protected: true,
-    sidenav: true
-  },
-  {
     display: 'Admin',
     routerLink: 'admin',
     index: 2,

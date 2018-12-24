@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private router: Router, private location: Location,
     private notification: NotificationService) {
     this.router.events.subscribe(event => {
-      this.currentLocation = this.location.path().replace('/', '');
+      this.currentLocation = this.location.path().replace('/', '') === 'home' ? 'Tiger Paw Code' : this.location.path().replace('/', '');
      });
   }
 }

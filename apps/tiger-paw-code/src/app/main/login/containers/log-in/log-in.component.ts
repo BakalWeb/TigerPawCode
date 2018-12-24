@@ -26,18 +26,20 @@ export class LogInComponent implements OnInit {
 
   intializeForm(): void {
     this.loginForm = this.fb.group({
-      username: ['adamb', Validators.required],
-      password: ['password', Validators.required],
-      rememberMe: [true]
+      username: ['bakalweb', Validators.required],
+      password: ['wonderfulgrape2', Validators.required],
+      // rememberMe: [true]
     });
   }
 
   logIn(): void {
-    const success = this.authService.login(
-      this.loginForm.controls['username'].value,
-      this.loginForm.controls['password'].value
-    );
-
+    let success: boolean;
+    this.authService.login((Object.assign({}, this.loginForm.value)))
+    .subscribe(res => {
+      success = res ? true : false;
+    }, error => {
+      console.error(error);
+    }, () => {
     // todo handle the remember me formcontrol
     if (!success) {
       this.notification.generateSnackbarNotification(
@@ -47,5 +49,6 @@ export class LogInComponent implements OnInit {
     }
 
     this.router.navigateByUrl('home');
+    });
   }
 }

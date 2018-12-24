@@ -21,7 +21,7 @@ export class MessagesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userId = this.authService.getLoggedInUserId();
+    // this.userId = this.authService.getLoggedInUserId();
 
     if (this.userId > 0) {
       this.getMessages();

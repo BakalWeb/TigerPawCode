@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
 /apis/TigerPawCodeAPI/.vs/TigerPawCodeAPI/v15/Server/sqlite3/storage.ide-wal
+=======
+apis/TigerPawCodeAPI/.vs/TigerPawCodeAPI/v15/Server/sqlite3/storage.ide
+apis/TigerPawCodeAPI/.vs/TigerPawCodeAPI/v15/Server/sqlite3/db.lock
+apis/TigerPawCodeAPI/.vs/TigerPawCodeAPI/v15/Server/sqlite3/storage.ide-shm
+apis/TigerPawCodeAPI/.vs/TigerPawCodeAPI/v15/Server/sqlite3/storage.ide-wal
+>>>>>>> feature/jwt

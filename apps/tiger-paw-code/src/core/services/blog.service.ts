@@ -10,18 +10,21 @@ import { of } from 'rxjs/internal/observable/of';
   providedIn: 'root'
 })
 export class BlogService {
+  private apiUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.inMemory ? environment.inMemoryApiUrl : environment.apiUrl;
+  }
 
   getBlog(id: number): Observable<BlogItem> {
-    return this.http.get<BlogItem>(`${environment.apiUrl}/blogs/?id=${id}`);
+    return this.http.get<BlogItem>(`${this.apiUrl}/blogs/?id=${id}`);
   }
 
   getAllBlogs(): Observable<BlogItem[]> {
-    return this.http.get<BlogItem[]>(`${environment.apiUrl}/blogs/`);
+    return this.http.get<BlogItem[]>(`${this.apiUrl}/blogs/`);
   }
 
   getLiveBlogs(): Observable<BlogItem[]> {
-    return this.http.get<BlogItem[]>(`${environment.apiUrl}/blogs/?status=${BlogItemStatus.published}`);
+    return this.http.get<BlogItem[]>(`${this.apiUrl}/blogs/?status=${BlogItemStatus.published}`);
   }
 }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  Router
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
@@ -14,19 +15,18 @@ import { NotificationService } from '@core/services/notification.service';
 export class LoggedInGuard implements CanActivate {
   constructor(
     private _authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> {
-    const isLoggedIn = this._authService.isLoggedIn();
-    if (!isLoggedIn) {
-      this.notificationService.generateSnackbarNotification(
-        'Unable to access that area until you are logged in.'
-      );
-    }
-    return of(isLoggedIn);
+  canActivate() {
+        const currentUser = this._authService.currentUserValue;
+        if (currentUser) {
+            return true;
+        }
+
+        this.notificationService.generateSnackbarNotification('You need to be logged in to see this area');
+        this.router.navigate(['/login']);
+        return false;
   }
 }
