@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TigerPawCodeAPI.Infrastructure.Configurations;
+using TigerPawCodeAPI.Models;
 using TigerPawCodeAPI.Services.Implementations;
 using TigerPawCodeAPI.Services.Interfaces;
 
@@ -58,12 +60,18 @@ namespace TigerPawCodeAPI
                     };
                 });
 
-            //services.Configure<IdentityConfiguration>(Configuration.GetSection("Identity"));
+            // sql connection
+            var connection = @"Server=tcp:tigerpawcode.database.windows.net,1433;Initial Catalog=tiger-paw-code;Persist Security Info=False;User ID=bakalweb;Password=NddM*8qEWd9%JwZE; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            services.AddDbContext<DataContext>
+                (options => options.UseSqlServer(connection));
+
+            // configurations
             services.AddSingleton(Configuration.GetSection("Identity").Get<IdentityConfiguration>());
-
-
+            
+            // services
             services.AddTransient<IAuthService, AuthService>();
 
+            // swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
