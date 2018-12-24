@@ -9,20 +9,19 @@ import { MaterialModule } from '@core/modules/material.module';
 import { HomeModule } from './main/home/home.module';
 import { RouterModule } from '@angular/router';
 import { AuthService, AUTH_PROVIDERS } from '@core/services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeApiService } from '@core/services/in-memory-api/in-memory';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonComponentsModule } from '@core/components/common-components.module';
 import { EscapeHtmlPipe } from '@core/pipes/keep-html.pipe';
 import { UserService } from '@core/services/user.service';
-import { ProtectedComponent } from './main/protected/protected/protected.component';
+import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     EscapeHtmlPipe,
-    ProtectedComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,13 +34,14 @@ import { ProtectedComponent } from './main/protected/protected/protected.compone
     FormsModule,
     ReactiveFormsModule,
     CommonComponentsModule,
-    InMemoryWebApiModule.forRoot(FakeApiService)
+    InMemoryWebApiModule.forRoot(FakeApiService, { passThruUnknownUrl: true }),
   ],
   providers: [
     AuthService,
     AUTH_PROVIDERS,
     LoggedInGuard,
-    UserService
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

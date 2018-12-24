@@ -18,24 +18,24 @@ export class MessageService {
    }
 
   setMessageUnreadCount(): void {
-    const userId = this.authService.getLoggedInUserId();
-    if (userId <= 0) {
-      this.count.next(0);
-      return;
-    }
-    this.getAllMessages(userId).subscribe( res => {
-      this.count.next(res.filter(x => x.dateRead == null).length);
-    });
+    // const userId = this.authService.getLoggedInUserId();
+    // if (userId <= 0) {
+    //   this.count.next(0);
+    //   return;
+    // }
+    // this.getAllMessages(userId).subscribe( res => {
+    //   this.count.next(res.filter(x => x.dateRead == null).length);
+    // });
   }
 
   getAllMessages(userId?: number): Observable<MessageItem[]> {
-    if (isNaN(userId)) {
-      if (this.authService.getLoggedInUserId() <= 0) {
-      return of(null);
-      } else {
-        userId = this.authService.getLoggedInUserId();
-      }
-    }
+    // if (isNaN(userId)) {
+    //   if (this.authService.getLoggedInUserId() <= 0) {
+    //   return of(null);
+    //   } else {
+    //     userId = this.authService.getLoggedInUserId();
+    //   }
+    // }
 
     return this.http.get<MessageItem[]>(`${environment.apiUrl}/messages/?recipientId=${userId}`
       )

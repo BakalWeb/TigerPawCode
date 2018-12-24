@@ -17,6 +17,10 @@ body {
   max-width: 100% !important;
   font-family: $body-font;
   background: #eee;
+
+  .container {
+    color: #808080;
+  }
 }
 
 .content-container,

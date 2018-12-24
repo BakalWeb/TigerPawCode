@@ -1,44 +1,57 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
-import { User } from '@core/models/user';
 import { of, Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserLogin } from '@core/models/user-login';
+import { environment } from '@env/environment';
+import { map } from 'rxjs/operators';
+import { User } from '@core/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private currentUserSubject: BehaviorSubject<UserLogin>;
+  public currentUser: Observable<UserLogin>; // this will need changing to user at some point
+  private apiUrl: string;
 
-  constructor(private userService: UserService) {  }
-
-  login(username: string, password: string): boolean {
-    if (username === 'adamb' && password === 'password') {
-      localStorage.setItem('loggedIn', 'true');
-      localStorage.setItem('userId', '1');
-      this.loggedIn.next(true);
-      return true;
-    }
-
-    this.loggedIn.next(false);
-    return false;
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.inMemory
+      ? environment.inMemoryApiUrl
+      : environment.apiUrl;
+    this.currentUserSubject = new BehaviorSubject<UserLogin>(JSON.parse(localStorage.getItem('jwt')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  getLoggedInUserId(): number {
-    return localStorage.getItem('userId') != null ? + localStorage.getItem('userId') :  0;
+  login(login: UserLogin) {
+    this.logout();
+    return this.http.post(`${this.apiUrl}/auth/login`, login).pipe(
+      map(token => {
+        // login successful if there's a jwt token in the response
+        if (token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('jwt', JSON.stringify(token));
+          this.currentUserSubject.next(login);
+        }
+
+        return login;
+      })
+    );
   }
+
+  public get currentUserValue(): UserLogin {
+    return this.currentUserSubject.value;
+}
 
   logout(): any {
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('userId');
+    // remove user from local storage to log user out
+    localStorage.removeItem('jwt');
+    this.currentUserSubject.next(null);
   }
 
-  isLoggedInStream(): Observable<boolean> {
-    this.loggedIn.next(this.isLoggedIn());
-    return this.loggedIn.asObservable();
-  }
-
-  isLoggedIn(): boolean {
-    return localStorage.getItem('loggedIn') != null ? true : false;
+  loggedInJwt(): string {
+    return localStorage.getItem('jwt') != null
+      ? localStorage.getItem('jwt')
+      : null;
   }
 }
 

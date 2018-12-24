@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4200/api'
+  inMemoryApiUrl: 'http://localhost:4200/api',
+  apiUrl: 'https://tigerpawcodeapi.azurewebsites.net/api',
+  inMemory: false
 };
