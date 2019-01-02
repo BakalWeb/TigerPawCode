@@ -1,0 +1,58 @@
+<div class="container">
+  <form [formGroup]="blogForm" *ngIf='blogForm' (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Headline" formControlName="headline">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Short Description" formControlName="shortDescription">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <input matInput placeholder="Image" formControlName="thumbnail">
+      </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option value="0">Draft</mat-option>
+        <mat-option value="1">Published</mat-option>
+        <mat-option value="2">Deleted</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br/>
+    <mat-slide-toggle formControlName="promoted" (change)="onActiveChange($event.checked)">
+      Promoted
+    </mat-slide-toggle>
+    <br/>
+
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Author" type="text" formControlName="author">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Content</mat-label>
+      <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="100"
+        formControlName="content"></textarea>
+    </mat-form-field>
+
+    <br/>
+    <mat-slide-toggle formControlName="promoted" [(ngModel)]="deleted">
+      Deleted
+    </mat-slide-toggle>
+    <br/>
+
+    <hr />
+
+    <mat-toolbar>
+      <div class="col-6">
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+      <div class="col">
+        <button mat-raised-button class="float-right" type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </mat-toolbar>
+
+  </form>
+</div>

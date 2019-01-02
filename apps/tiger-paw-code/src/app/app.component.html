@@ -1,15 +1,11 @@
 <mat-sidenav-container class="sidebar-container">
-  <mat-sidenav #sidenav mode="side" opened="true" disableClose="true" closedStart="false" autoFocus="true" class="sidebar">
+  <mat-sidenav #sidenav mode="over" opened="false" disableClose="false" closedStart="true" autoFocus="true" class="sidebar"
+    #sidenav>
     <p class="text-right">
-      <button mat-button class="sidebar-close" (click)="sidenav.toggle()">
+      <button mat-button class="sidebar-close" (click)="sidenavToggle()">
         <span aria-label="Close Sidebar menu"></span>
         <mat-icon>close</mat-icon>
       </button></p>
-
-    <a [routerLink]="['home']">
-      <img src="https://www.fillmurray.com/140/100" alt="TigerPawCode logo" class="logo" />
-    </a>
-    <hr />
 
     <ul class="sidebar-menu">
       <li *ngFor="let item of menuItems" class="sidebar-item">
@@ -19,49 +15,48 @@
         </a>
       </li>
     </ul>
-  </mat-sidenav>
 
-  <mat-sidenav-content class="content-container">
-    <div class="container">
-    <div class="row">
-      <div class="col-5">
-        <h2 class="page-name">{{ currentLocation | titlecase }}</h2>
-      </div>
-      <div class="col">
-          <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                  <a class="nav-item nav-link" href="#">Features</a>
-                  <a class="nav-item nav-link" href="#">Pricing</a>
-                  <button mat-button class="nav-item nav-link" (click)="sidenav.toggle()">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                </div>
-              </div>
-            </nav> -->
-
-            <div class="btn-group align-right top-nav-buttons" role="group">
-                <app-login-header *ngIf="currentLocation !== 'login'"></app-login-header>
-                <app-message-chip></app-message-chip>
-                <button mat-button class="nav-item nav-link" (click)="sidenav.toggle()">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-              </div>
-
-
-
+    <div class="row no-margin">
+      <div class="sidenav-bottom-wrapper">
+            <a href="login" class="text-center">Login</a>
+            <a href="login" class="text-center">Register</a>
       </div>
     </div>
-  </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content-container" (scroll)="onWindowScroll($event)">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <h2 class="logo-name"><a href="home">Tiger Paw Code</a></h2>
+          </div>
+          <div class="col-6 header-buttons">
+              <button mat-button class="nav-item nav-link header-button" (click)="sidenavToggle()">
+                  <mat-icon class="menu-icon">{{ menuIcon }}</mat-icon>
+                </button>
+            <app-login-header class="header-button" *ngIf="currentLocation !== 'login'"></app-login-header>
+
+          </div>
+          <div class="col-4">
+
+          </div>
+          <!--   <div class="col">
+
+        <div class="btn-group align-right top-nav-buttons" role="group">
+
+              <app-message-chip></app-message-chip>
+
+            </div>
+
+          </div>-->
+        </div>
+      </div>
+
+    </header>
+
     <router-outlet></router-outlet>
 
     <footer></footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-

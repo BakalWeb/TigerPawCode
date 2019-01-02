@@ -22,7 +22,7 @@ export class BlogComponent implements OnInit {
   }
 
   getLiveBlogs(): void {
-    this.blogService.getLiveBlogs().subscribe((blogs: BlogItem[]) => {
+    this.blogService.getLiveBlogs().subscribe(blogs => {
       this.blogs = blogs;
     }, error => {
       console.log(error);

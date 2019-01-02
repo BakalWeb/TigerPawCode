@@ -1,11 +1,28 @@
 <div class="container">
   <div class="row">
 
-      <mat-tab-group>
-          <mat-tab label="Blogs"> Blogs </mat-tab>
-          <mat-tab label="Second"> Content 2 </mat-tab>
-          <mat-tab label="Third"> Content 3 </mat-tab>
-        </mat-tab-group>
+    <!-- <mat-toolbar>
+      <mat-toolbar-row>
+          <div class="col-6">
+              <button mat-raised-button (click)="create()">Create</button>
+          </div>
 
-    </div>
+          <div class="col-6">
+            <button mat-raised-button class="float-right">Save</button>
+            <button mat-raised-button class="float-right">Cancel</button>
+          </div>
+      </mat-toolbar-row>
+    </mat-toolbar> -->
+
+    <mat-tab-group (selectedTabChange)="activeTab($event)" class="tabs">
+      <mat-tab label="Blogs">
+        <app-blogs-list></app-blogs-list>
+      </mat-tab>
+      <!-- <mat-tab label="Second"> Content 2 </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab> -->
+    </mat-tab-group>
+
+    <button mat-fab class="create" (click)="create()"><mat-icon>+</mat-icon></button>
+
+  </div>
 </div>

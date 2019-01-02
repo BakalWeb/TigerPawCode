@@ -7,8 +7,10 @@ import * as moment from 'moment';
 export class BlogItemPostedPipe implements PipeTransform {
   transform(value: Date, args?: any): any {
     const now = moment.utc();
-    const datePosted = moment(value).format('DD/MM/YYYY HH:MM:SS');
+    const datePosted = moment(value);
     const hourDiff = moment.duration(now.diff(value), 'milliseconds').asHours();
+    const dayDiff = moment.duration(now.diff(value), 'milliseconds').asDays();
+    const monthDiff = moment.duration(now.diff(value), 'milliseconds').asMonths();
 
     if (hourDiff < 0 ) {
       console.error(`Invalid blog item date has been passed to the pipe: ${datePosted}`);
@@ -25,28 +27,26 @@ export class BlogItemPostedPipe implements PipeTransform {
       if (hourDiff > 1 && hourDiff < 2) {
         return 'An hour ago';
       } else if (hourDiff > 2 && hourDiff < 24) {
-        return `${hourDiff.toString()} hours ago`;
+        return `${Math.round(hourDiff).toString()} hours ago`;
       } else if (hourDiff > 24 && hourDiff < 48) {
         return 'A day ago';
       } else if (hourDiff > 48) {
         // days
-        const days = moment.duration(hourDiff).asDays();
-        if (days > 2 && days < 30) {
-          return `${days} days ago`;
-        } else if (days > 30) {
+        if (dayDiff > 2 && dayDiff < 30) {
+          return `${Math.round(dayDiff)} days ago`;
+        } else if (dayDiff > 30) {
           // months
-          const months = moment.duration(hourDiff).asMonths();
-          if (months >= 1 && months < 2) {
+          if (monthDiff >= 1 && monthDiff < 2) {
             return '1 month ago';
-          } else if (months > 2 && months < 12) {
-            return `${months} months ago`;
-          } else if (months > 12) {
+          } else if (monthDiff > 2 && monthDiff < 12) {
+            return `${Math.round(monthDiff)} months ago`;
+          } else if (monthDiff > 12) {
             // years
-            if (months > 12 && months < 24) {
+            if (monthDiff > 12 && monthDiff < 24) {
               return 'A year ago';
             } else {
               const years = moment.duration(hourDiff).asYears();
-              return `${years} ago`;
+              return `${Math.round(years)} ago`;
             }
           }
         }
