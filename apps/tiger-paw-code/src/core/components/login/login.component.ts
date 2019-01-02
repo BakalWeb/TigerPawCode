@@ -3,6 +3,7 @@ import { AuthService } from '@core/services/auth.service';
 import { User } from '@core/models/user';
 import { UserService } from '@core/services/user.service';
 import { UserLogin } from '@core/models/user-login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-header',
@@ -13,7 +14,7 @@ import { UserLogin } from '@core/models/user-login';
     </div>
 
     <ng-template #login>
-      <button mat-button [routerLink]="['login']">Login</button>
+      <a href="login">Login</a>
     </ng-template>
   `
 })

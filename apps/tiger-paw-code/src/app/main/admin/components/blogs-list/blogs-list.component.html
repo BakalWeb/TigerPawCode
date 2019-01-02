@@ -1,0 +1,48 @@
+<div class="container">
+
+  <!-- <button mat-raised-button class="create" (click)='create()'>Create</button> -->
+
+      <mat-table #table [dataSource]="datasource" matSort>
+
+        <ng-container cdkColumnDef="id">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> ID </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="headline">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Headline </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{ row.headline }} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="status">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{row.status }} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="promoted">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Promoted </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{row.promoted}} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="dateLive">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Live </mat-header-cell>
+          <mat-cell *cdkCellDef="let row"> {{row.dateLive | date: 'yyyy-MM-dd hh:mm:ss'}} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="deleted">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Deleted </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{ (row.dateDeleted) ? 'Deleted' : '' }} </mat-cell>
+          </ng-container>
+
+        <ng-container cdkColumnDef="edit">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *cdkCellDef="let row">
+            <button mat-button (click)="edit(row.id)">Edit</button>
+            <button mat-raised-button color="danger" (click)="delete(row.id)">Delete</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [class.deleted]='row.dateDeleted'></mat-row>
+      </mat-table>
+</div>

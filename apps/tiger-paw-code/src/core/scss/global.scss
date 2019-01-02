@@ -16,11 +16,16 @@ body {
   min-height: 100%;
   max-width: 100% !important;
   font-family: $body-font;
-  background: #eee;
+  background: #fff;
 
-  .container {
+  .container, .mat-card {
     color: #808080;
+    font-family: $body-font;
   }
+}
+
+a {
+  color: $primary-orange;
 }
 
 .content-container,
@@ -41,14 +46,72 @@ body {
   min-height: 100%;
 }
 
-.align-right {
-  float: right;
+.full-width,
+.mat-tab-group {
+  width: 100%;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.content-block {
+  padding: 20px 0;
+}
+.grey-1 {
+  background: #eee;
+}
+.grey-2 {
+  background: #d6d6d6;
+}
+.grey-3 {
+  background: #bebebe;
+}
+
+.blockquote {
+  border-left: 3px dashed $primary-orange;
+  padding-left: 15px;
+  margin-left: 10%;
+}
+/* Header
+----------------------------------------------------------------------------
+============================================================================
+--------------------------------------------------------------------------*/
+header {
+  padding: 20px 0;
+  width: 100%;
+  border-bottom: 1px dashed $secondary-orange;
+  margin-bottom: 20px;
+
+  .logo-name {
+    a {
+      color: $light-grey;
+      font-family: $heading-font;
+
+      &:hover {
+        text-decoration: none;
+        color: $dark-grey;
+        transition: all 1s;
+      }
+    }
+  }
 }
 
 /* Angular Material Override styles
 ----------------------------------------------------------------------------
 ============================================================================
 --------------------------------------------------------------------------*/
+.container-fluid {
+  padding: 0;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $primary-orange;
+}
+.mat-card-actions .mat-button:first-child, .mat-card-actions .mat-raised-button:first-child {
+  color: $primary-orange;
+}
+
 .primary {
   background: $primary-orange;
   color: $primary-orange-color;
@@ -62,9 +125,9 @@ body {
 .mat-snack-bar-container {
   left: -10px !important;
   position: absolute !important;
-  max-width: 30% !important;
+  // max-width: 30% !important;
   margin: 0 !important;
-  margin-top: 2% !important;
+  margin-top: 5% !important;
 }
 
 .mat-card.card-gap {

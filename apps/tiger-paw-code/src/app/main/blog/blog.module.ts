@@ -7,6 +7,7 @@ import { BlogService } from '@core/services/blog.service';
 import { BlogItemPostedPipe } from '@core/pipes/blog-item-posted.pipe';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CommonComponentsModule } from '@core/components/common-components.module';
 
 const routes: Route[] = [
   {
@@ -25,6 +26,7 @@ const routes: Route[] = [
     MaterialModule,
     ScrollingModule,
     RouterModule.forChild(routes),
+    CommonComponentsModule
   ],
   declarations: [
     BlogComponent,

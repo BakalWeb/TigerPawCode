@@ -38,13 +38,14 @@ namespace TigerPawCodeAPI
 
             services.AddCors(options =>
             {
-                options.AddPolicy("EnableCORS", builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
-                });
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -70,10 +71,12 @@ namespace TigerPawCodeAPI
             
             // services
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IBlogService, BlogService>();
 
             // swagger
             services.AddSwaggerGen(c =>
             {
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
         }
@@ -90,7 +93,7 @@ namespace TigerPawCodeAPI
                 app.UseHsts();
             }
 
-            app.UseCors("EnableCORS");
+            app.UseCors("CorsPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

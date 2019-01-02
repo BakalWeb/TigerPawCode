@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +9,8 @@ namespace TigerPawCodeAPI.Models
 {
     public class Blog
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
 
         public string Headline { get; set; }
@@ -28,6 +32,8 @@ namespace TigerPawCodeAPI.Models
         public string Author { get; set; }
 
         public DateTime? DateLive { get; set; }
+
+        public DateTime? DateDeleted { get; set; }
     }
 
     public enum BlogItemStatus

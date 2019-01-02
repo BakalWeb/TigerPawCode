@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@core/models/user';
-import { AuthService } from '@core/services/auth.service';
+import { Banner } from '@core/interfaces/banner.interface';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +7,12 @@ import { AuthService } from '@core/services/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  banner: Banner = {
+    image: 'business-1.jpg',
+    heading: 'What is Tiger Paw Code',
+    text: 'Find out how this site came to be',
+    blogItem: false
+  };
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

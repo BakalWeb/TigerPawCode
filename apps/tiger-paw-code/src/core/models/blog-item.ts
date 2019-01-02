@@ -10,6 +10,8 @@ export class BlogItem {
   thumbnail: string;
   author: string;
   dateLive?: Date;
+  dateDeleted?: Date;
+  tags?: string[];
 }
 
 export enum BlogItemStatus {

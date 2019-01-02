@@ -1,0 +1,12 @@
+<div class="subscribe-container">
+  <div class="col-sm-6 offset-sm-3">
+      <label>Sign up to receive notifications for new blog posts</label>
+    <div class="form-inline">
+      <div class="form-group">
+        <input [(ngModel)]="email" class="form-control full-width subscribe" type="email" placeholder="Enter email address" />
+        <button mat-raised-button (click)="subscribe()" class="subscribe-btn">Subscribe</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+@import '../../scss/colors';
+
+.subscribe-container {
+  min-height: 50px;
+  background: $primary-orange;
+  padding: 20px;
+
+  label {
+    color: $primary-orange-color;
+  }
+
+  .subscribe {
+    padding: 20px;
+  }
+
+  .subscribe-btn {
+    margin-left: 10px;
+  }
+}

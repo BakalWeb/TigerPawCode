@@ -5,6 +5,7 @@ import { BlogService } from '@core/services/blog.service';
 import { BlogItem } from '@core/models/blog-item';
 import { of, forkJoin, pipe } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Banner } from '@core/interfaces/banner.interface';
 
 @Component({
   selector: 'app-blog-item',
@@ -16,6 +17,7 @@ export class BlogItemComponent implements OnInit {
   loadingBlogNav = true;
   previousId: number;
   nextId: number;
+  banner: Banner;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,13 +35,21 @@ export class BlogItemComponent implements OnInit {
       }
       this.blogService.getBlog(id).subscribe(
         res => {
-          this.blog = res[0];
+          this.blog = res;
+          this.banner = {
+            image: this.blog.thumbnail,
+            heading: this.blog.headline,
+            text: `Estimated reading time: ${this.blog.estimatedReadingTime} minutes`,
+            blogItem: false
+          };
         },
         error => {
           console.log(error);
         },
         () => {
-          this.generateBlogNavigation();
+          if (this.blog) {
+          // this.generateBlogNavigation();
+          }
         }
       );
     });
@@ -51,7 +61,9 @@ export class BlogItemComponent implements OnInit {
     forkJoin(
       this.blogService.getBlog(previousId).pipe(
         map(data => {
-          return { result: 'succes', blogs: data };
+          if (data) {
+          return { result: 'success', blogs: data };
+          }
         }),
         catchError(err => {
           console.log(err);
@@ -60,7 +72,7 @@ export class BlogItemComponent implements OnInit {
       ),
       this.blogService.getBlog(nextId).pipe(
         map(data => {
-          return { result: 'succes', blogs: data };
+          return { result: 'success', blogs: data };
         }),
         catchError(err => {
           console.log(err);

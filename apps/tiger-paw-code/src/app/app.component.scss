@@ -2,10 +2,31 @@
 @import '../core/scss/fonts';
 
 .sidebar {
+  overflow: hidden;
 
   .logo {
     margin: 0 auto;
     display: block;
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+
+  .sidenav-bottom-wrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    a {
+      display: block;
+      background: $primary-orange;
+      color: $primary-orange-color;
+      width: 50%;
+      float: left;
+      padding: 15px 0;
+      border-right: 1px solid $secondary-orange;
+    }
   }
 }
 
@@ -19,8 +40,8 @@
     margin: 3px;
 
     .active {
-      background: $primary-orange;
-      color: $primary-orange-color;
+      background: #F3F3F2;
+      color: $secondary-orange;
     }
 
     a {
@@ -54,43 +75,18 @@
 
 .content-container {
   padding-bottom: 50px;
-  .page-name {
-    font-family: $heading-font;
-    color: $light-grey;
-    padding: 10px;
-    margin-left: -10px;
+
+  .menu-icon {
+    color: $primary-orange;
   }
 
-  .btn-group  {
-    padding: 10px;
-  }
+  .header-buttons {
 
-  .top-nav-buttons {
-    margin: 10px 3px 0 5px;
-  }
-
-  .log-in {
-    margin-bottom:  -5px;
+    .header-button {
+      float: right;
+      display: inline-table;
+      margin: 10px;
+      display: flex;
+    }
   }
 }
-
-.navbar-nav {
-
-  .nav-link {
-    text-align: left;
-  }
-}
-
-/*
-footer {
-  background: $primary-green;
-  height: 100px;
-  width: 100%;
-  position: absolute;
-  bottom: -50px;
-  transform: rotate(1deg);
-  -webkit-clip-path: polygon(0 67%,100% 29%,100% 86%,0 100%);
-  clip-path: polygon(0 67%,100% 29%,100% 86%,0 100%);
-  z-index: 9999;
-}
-*/

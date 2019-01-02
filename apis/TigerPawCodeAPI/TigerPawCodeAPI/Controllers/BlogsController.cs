@@ -1,125 +1,113 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TigerPawCodeAPI.Models;
+using TigerPawCodeAPI.Services.Interfaces;
 
 namespace TigerPawCodeAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
-        private readonly DataContext _context;
-
-        public BlogsController(DataContext context)
+        private readonly IBlogService _blogService;
+        public BlogsController(IBlogService blogService)
         {
-            _context = context;
+            _blogService = blogService ?? throw new NotImplementedException(nameof(blogService));
         }
 
-        // GET: api/Blogs
         [HttpGet]
-        public IEnumerable<Blog> GetBlogs()
+        public async Task<IActionResult> GetAllBlogs()
         {
-            return _context.Blogs;
-        }
-
-        // GET: api/Blogs/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBlog([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var blog = await _context.Blogs.FindAsync(id);
-
-            if (blog == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(blog);
-        }
-
-        // PUT: api/Blogs/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBlog([FromRoute] int id, [FromBody] Blog blog)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != blog.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(blog).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                IEnumerable<Blog> result = await _blogService.GetAllBlogs();
+                return Ok(result);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!BlogExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                Console.WriteLine(e);
+                throw;
             }
-
-            return NoContent();
         }
 
-        // POST: api/Blogs
+        [HttpGet("live")]
+        public async Task<IActionResult> GetLiveBlogs()
+        {
+            try
+            {
+                IEnumerable<Blog> result = await _blogService.GetLiveBlogs();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBlog(int id)
+        {
+            try
+            {
+                Blog result = await _blogService.GetBlog(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> PostBlog([FromBody] Blog blog)
+        public async Task<IActionResult> CreateBlog(Blog model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                Blog result = await _blogService.CreateBlog(model);
+                return Ok(result);
             }
-
-            _context.Blogs.Add(blog);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBlog", new { id = blog.Id }, blog);
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        // DELETE: api/Blogs/5
+        [HttpPut]
+        public async Task<IActionResult> UpdateBlog(Blog model)
+        {
+            try
+            {
+                var result = await _blogService.UpdateBlog(model);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBlog([FromRoute] int id)
+        public async Task<IActionResult> DeleteBlog(int id)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                var result = await _blogService.DeleteBlog(id);
+                return Ok(result);
             }
-
-            var blog = await _context.Blogs.FindAsync(id);
-            if (blog == null)
+            catch (Exception e)
             {
-                return NotFound();
+                Console.WriteLine(e);
+                throw;
             }
-
-            _context.Blogs.Remove(blog);
-            await _context.SaveChangesAsync();
-
-            return Ok(blog);
-        }
-
-        private bool BlogExists(int id)
-        {
-            return _context.Blogs.Any(e => e.Id == id);
         }
     }
 }

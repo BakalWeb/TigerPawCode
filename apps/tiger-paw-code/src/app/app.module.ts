@@ -19,10 +19,7 @@ import { UserService } from '@core/services/user.service';
 import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EscapeHtmlPipe,
-  ],
+  declarations: [AppComponent, EscapeHtmlPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,14 +31,16 @@ import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
     FormsModule,
     ReactiveFormsModule,
     CommonComponentsModule,
-    InMemoryWebApiModule.forRoot(FakeApiService, { passThruUnknownUrl: true }),
+    // InMemoryWebApiModule.forRoot(FakeApiService, {
+    //   passThruUnknownUrl: true
+    // })
   ],
   providers: [
     AuthService,
     AUTH_PROVIDERS,
     LoggedInGuard,
     UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

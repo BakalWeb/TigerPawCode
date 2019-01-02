@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 blogs">
+
+      <mat-spinner class="center" mode="indeterminate" *ngIf='!blogs'></mat-spinner>
+
+
       <mat-card *ngFor="let item of blogs" class="card-gap blog-item">
         <span class="small author">{{ item.author }}</span>
-        <span class="small posted-date"> {{ item.dateCreated | blogItemPosted | lowercase }}</span>
+        <span class="small posted-date"> {{ item.dateLive | blogItemPosted  }}</span>
         <mat-card-header>
           <mat-card-title>{{ item.headline }}</mat-card-title>
           <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
@@ -16,9 +20,9 @@
 
     <div class="col">
       <mat-card>
-        <mat-card-title>Promoted Blogs</mat-card-title>
+        <h2>Promoted Blog Posts</h2>
 
-        <p>Cannot be bothered to dev this yet so please make do with this image instead for now...</p>
+        <p>I haven't gotten round to develop this yet so please make do with this image instead for now...</p>
 
         <img src="https://hugelolcdn.com/i/68702.jpg" class="img-fluid" alt="tired owl" />
       </mat-card>
