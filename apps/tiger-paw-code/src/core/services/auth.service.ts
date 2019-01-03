@@ -5,6 +5,7 @@ import { UserLogin } from '@core/models/user-login';
 import { environment } from '@env/environment';
 import { map } from 'rxjs/operators';
 import { User } from '@core/models/user';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   public currentUser: Observable<UserLogin>; // this will need changing to user at some point
   private apiUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private logService: LogService) {
     this.apiUrl = environment.inMemory
       ? environment.inMemoryApiUrl
       : environment.apiUrl;
@@ -23,7 +24,8 @@ export class AuthService {
   }
 
   login(login: UserLogin) {
-    this.logout();
+    try {
+      this.logout();
     return this.http.post(`${this.apiUrl}/auth/login`, login).pipe(
       map(token => {
         // login successful if there's a jwt token in the response
@@ -36,6 +38,9 @@ export class AuthService {
         return login;
       })
     );
+    } catch (error) {
+      this.logService.handleError(error);
+    }
   }
 
   public get currentUserValue(): UserLogin {

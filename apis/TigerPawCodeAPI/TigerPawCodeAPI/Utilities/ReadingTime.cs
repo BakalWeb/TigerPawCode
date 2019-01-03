@@ -12,8 +12,16 @@ namespace TigerPawCodeAPI.Utilities
 
         public static int CalculateEstimatedReadingTime(string text)
         {
-            var collection = Regex.Matches(text, @"[\S]+");
-            return (int)(collection.Count / WordsReadPerMinute);
+            try
+            {
+                var collection = Regex.Matches(text, @"[\S]+");
+                return (int)(collection.Count / WordsReadPerMinute);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

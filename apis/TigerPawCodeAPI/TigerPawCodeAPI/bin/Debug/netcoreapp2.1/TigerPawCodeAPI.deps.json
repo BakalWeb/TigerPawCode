@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "0895c1c7d1cd0383d7c9f5e9cdecd19251c62cf5"
+    "signature": "e02d6b028c4609b67fc19c41cc2534df190163f9"
   },
   "compilationOptions": {
     "defines": [
@@ -28,6 +28,8 @@
           "Microsoft.EntityFrameworkCore": "2.1.4",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
+          "Sentry": "1.1.0",
+          "SharpRaven": "2.4.0",
           "Swashbuckle.AspNetCore": "4.0.1"
         },
         "runtime": {
@@ -435,6 +437,60 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
+      "Sentry/1.1.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "Sentry.PlatformAbstractions": "1.0.0",
+          "Sentry.Protocol": "1.0.2",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sentry.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Sentry.dll": {}
+        }
+      },
+      "Sentry.PlatformAbstractions/1.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Sentry.PlatformAbstractions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Sentry.PlatformAbstractions.dll": {}
+        }
+      },
+      "Sentry.Protocol/1.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Sentry.Protocol.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Sentry.Protocol.dll": {}
+        }
+      },
+      "SharpRaven/2.4.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "System.Configuration.ConfigurationManager": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SharpRaven.dll": {
+            "assemblyVersion": "2.4.0.0",
+            "fileVersion": "2.4.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/SharpRaven.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/4.0.1": {
         "dependencies": {
           "Swashbuckle.AspNetCore.Swagger": "4.0.1",
@@ -624,6 +680,20 @@
           "lib/netstandard1.0/System.Composition.TypedParts.dll": {}
         }
       },
+      "System.Configuration.ConfigurationManager/4.4.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.6.25519.3"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        }
+      },
       "System.Diagnostics.DiagnosticSource/4.5.1": {
         "runtime": {
           "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {
@@ -673,6 +743,22 @@
           "System.Reflection.Extensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.6.25519.3"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.6.25519.3"
+          }
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3706,6 +3792,34 @@
       "path": "remotion.linq/2.2.0",
       "hashPath": "remotion.linq.2.2.0.nupkg.sha512"
     },
+    "Sentry/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ffg/xCtu9Y1l0H7/Ewwicu2YD8ts839ZrAdcOR8NoX0HfvS9dp5r2A9iEbWtJJ5zWWtcF/Y19bpvtCIRzUGHEg==",
+      "path": "sentry/1.1.0",
+      "hashPath": "sentry.1.1.0.nupkg.sha512"
+    },
+    "Sentry.PlatformAbstractions/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-d5eFP0i9lDbZ+wXiZ7M9MfU09iLuRviIxXgFyAg0vRSoHCubi/KNb1wCRoX60tE6HQZMwtSseGa0LnLABMjI8Q==",
+      "path": "sentry.platformabstractions/1.0.0",
+      "hashPath": "sentry.platformabstractions.1.0.0.nupkg.sha512"
+    },
+    "Sentry.Protocol/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nZxCrw11K+mk74EAKfEv+RO9L42xokrmKwNQ0MarzphxgJZ8p040C/HUJMbgdf48ARKUNOAnSf5bm9emP9yYfA==",
+      "path": "sentry.protocol/1.0.2",
+      "hashPath": "sentry.protocol.1.0.2.nupkg.sha512"
+    },
+    "SharpRaven/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-m4qo+gSl+fxCot4mknC+6lI9RazJ3NYJB1t9E6SkIMy3Kk9em92HjFxzclHKQ0q1nZDyppZyqIGu425g46rIow==",
+      "path": "sharpraven/2.4.0",
+      "hashPath": "sharpraven.2.4.0.nupkg.sha512"
+    },
     "Swashbuckle.AspNetCore/4.0.1": {
       "type": "package",
       "serviceable": true,
@@ -3783,6 +3897,13 @@
       "path": "system.composition.typedparts/1.0.31",
       "hashPath": "system.composition.typedparts.1.0.31.nupkg.sha512"
     },
+    "System.Configuration.ConfigurationManager/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RLYB3YOmdz9dE3zMhBFGv3GF74upGjH0nF0G9lFFRLNLsCEMIpiuQsMGv2qE0qdp1JdheVNO8RIRpUKdokiK+g==",
+      "path": "system.configuration.configurationmanager/4.4.0",
+      "hashPath": "system.configuration.configurationmanager.4.4.0.nupkg.sha512"
+    },
     "System.Diagnostics.DiagnosticSource/4.5.1": {
       "type": "package",
       "serviceable": true,
@@ -3810,6 +3931,13 @@
       "sha512": "sha512-Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
       "path": "system.linq.queryable/4.0.1",
       "hashPath": "system.linq.queryable.4.0.1.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WwEexvBd+17yfY7fcS+fBGl+HADEfCJuKeDJqBT7D6j6vKwYvfLyGuq2y/MmrKORC6mbYwth7kjinO1mPhTL3g==",
+      "path": "system.security.cryptography.protecteddata/4.4.0",
+      "hashPath": "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",
