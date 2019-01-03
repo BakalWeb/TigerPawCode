@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '@env/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,45 +13,65 @@ import { of } from 'rxjs/internal/observable/of';
 export class BlogService {
   private apiUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private logService: LogService) {
     this.apiUrl = environment.inMemory
     ? environment.inMemoryApiUrl
     : environment.apiUrl;
   }
 
   getBlog(id: number): Observable<BlogItem> {
-    if (id <= 0) {
-      return null;
+    try {
+      if (id <= 0) {
+        return null;
+      }
+      return this.http.get<BlogItem>(`${this.apiUrl}/blogs/${id}`);
+    } catch (error) {
+      this.logService.handleError(error);
     }
-    return this.http.get<BlogItem>(`${this.apiUrl}/blogs/${id}`);
   }
 
   getAllBlogs(): Observable<BlogItem[]> {
-    return this.http.get<BlogItem[]>(`${this.apiUrl}/blogs/`);
+    try {
+      return this.http.get<BlogItem[]>(`${this.apiUrl}/blogs/`);
+    } catch (error) {
+      this.logService.handleError(error);
+    }
   }
 
   getLiveBlogs(): Observable<BlogItem[]> {
    try {
     return this.http.get<BlogItem[]>(`${this.apiUrl}/blogs/live`);
    } catch (error) {
-     console.error(error);
+    this.logService.handleError(error);
    }
   }
 
   createBlog(blogItem: BlogItem): Observable<BlogItem> {
+   try {
     return this.http.post<BlogItem>(`${this.apiUrl}/blogs/`, blogItem)
     .pipe(tap(x => {
       // console.log(`Submitted blog for post: ${blogItem}`);
     }
     ));
+   } catch (error) {
+     this.logService.handleError(error);
+   }
   }
 
   updateBlog(blogItem: BlogItem): Observable<BlogItem> {
-    return this.http.put<BlogItem>(`${this.apiUrl}/blogs/`, blogItem);
+    try {
+      return this.http.put<BlogItem>(`${this.apiUrl}/blogs/`, blogItem);
+    } catch (error) {
+      this.logService.handleError(error);
+    }
   }
 
   deleteBlog(id: number): Observable<any> {
-    return this.http.delete<BlogItem>(`${this.apiUrl}/blogs/${id}`);
+    try {
+      return this.http.delete<BlogItem>(`${this.apiUrl}/blogs/${id}`);
+    } catch (error) {
+      this.logService.handleError(error);
+    }
   }
 
 }

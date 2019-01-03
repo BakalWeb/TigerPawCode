@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Sentry;
 using TigerPawCodeAPI.Models;
 using TigerPawCodeAPI.Services.Interfaces;
 
@@ -15,9 +16,11 @@ namespace TigerPawCodeAPI.Controllers
     public class BlogsController : ControllerBase
     {
         private readonly IBlogService _blogService;
-        public BlogsController(IBlogService blogService)
+        private readonly IErrorHandler _errorHandler;
+        public BlogsController(IBlogService blogService, IErrorHandler errorHandler)
         {
             _blogService = blogService ?? throw new NotImplementedException(nameof(blogService));
+            _errorHandler = errorHandler ?? throw new NotImplementedException(nameof(errorHandler));
         }
 
         [HttpGet]
@@ -30,7 +33,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }
@@ -45,7 +48,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }
@@ -60,7 +63,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }
@@ -75,7 +78,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }
@@ -90,7 +93,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }
@@ -105,7 +108,7 @@ namespace TigerPawCodeAPI.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                await _errorHandler.CaptureAsync(e);
                 throw;
             }
         }

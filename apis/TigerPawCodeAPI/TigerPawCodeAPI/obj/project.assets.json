@@ -3013,6 +3013,52 @@
           }
         }
       },
+      "Sentry/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2",
+          "Sentry.PlatformAbstractions": "1.0.0",
+          "Sentry.Protocol": "1.0.2",
+          "System.Collections.Immutable": "1.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Sentry.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sentry.dll": {}
+        }
+      },
+      "Sentry.PlatformAbstractions/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Sentry.PlatformAbstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sentry.PlatformAbstractions.dll": {}
+        }
+      },
+      "Sentry.Protocol/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Sentry.Protocol.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Sentry.Protocol.dll": {}
+        }
+      },
+      "SharpRaven/2.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3",
+          "System.Configuration.ConfigurationManager": "4.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/SharpRaven.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SharpRaven.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -3288,6 +3334,18 @@
         },
         "runtime": {
           "lib/netstandard1.0/System.Composition.TypedParts.dll": {}
+        }
+      },
+      "System.Configuration.ConfigurationManager/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         }
       },
       "System.Console/4.3.0": {
@@ -4281,6 +4339,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Security.Cryptography.Primitives.dll": {}
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
         }
       },
       "System.Security.Cryptography.X509Certificates/4.3.0": {
@@ -8055,6 +8128,79 @@
         "version.txt"
       ]
     },
+    "Sentry/1.1.0": {
+      "sha512": "Ffg/xCtu9Y1l0H7/Ewwicu2YD8ts839ZrAdcOR8NoX0HfvS9dp5r2A9iEbWtJJ5zWWtcF/Y19bpvtCIRzUGHEg==",
+      "type": "package",
+      "path": "sentry/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/Sentry.dll",
+        "lib/net461/Sentry.pdb",
+        "lib/net461/Sentry.xml",
+        "lib/netstandard2.0/Sentry.dll",
+        "lib/netstandard2.0/Sentry.pdb",
+        "lib/netstandard2.0/Sentry.xml",
+        "sentry.1.1.0.nupkg.sha512",
+        "sentry.nuspec"
+      ]
+    },
+    "Sentry.PlatformAbstractions/1.0.0": {
+      "sha512": "d5eFP0i9lDbZ+wXiZ7M9MfU09iLuRviIxXgFyAg0vRSoHCubi/KNb1wCRoX60tE6HQZMwtSseGa0LnLABMjI8Q==",
+      "type": "package",
+      "path": "sentry.platformabstractions/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Sentry.PlatformAbstractions.dll",
+        "lib/net40/Sentry.PlatformAbstractions.dll",
+        "lib/net45/Sentry.PlatformAbstractions.dll",
+        "lib/net471/Sentry.PlatformAbstractions.dll",
+        "lib/netstandard1.5/Sentry.PlatformAbstractions.dll",
+        "lib/netstandard2.0/Sentry.PlatformAbstractions.dll",
+        "sentry.platformabstractions.1.0.0.nupkg.sha512",
+        "sentry.platformabstractions.nuspec"
+      ]
+    },
+    "Sentry.Protocol/1.0.2": {
+      "sha512": "nZxCrw11K+mk74EAKfEv+RO9L42xokrmKwNQ0MarzphxgJZ8p040C/HUJMbgdf48ARKUNOAnSf5bm9emP9yYfA==",
+      "type": "package",
+      "path": "sentry.protocol/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Sentry.Protocol.dll",
+        "lib/net45/Sentry.Protocol.pdb",
+        "lib/net45/Sentry.Protocol.xml",
+        "lib/net46/Sentry.Protocol.dll",
+        "lib/net46/Sentry.Protocol.pdb",
+        "lib/net46/Sentry.Protocol.xml",
+        "lib/netstandard1.3/Sentry.Protocol.dll",
+        "lib/netstandard1.3/Sentry.Protocol.pdb",
+        "lib/netstandard1.3/Sentry.Protocol.xml",
+        "lib/netstandard2.0/Sentry.Protocol.dll",
+        "lib/netstandard2.0/Sentry.Protocol.pdb",
+        "lib/netstandard2.0/Sentry.Protocol.xml",
+        "sentry.protocol.1.0.2.nupkg.sha512",
+        "sentry.protocol.nuspec"
+      ]
+    },
+    "SharpRaven/2.4.0": {
+      "sha512": "m4qo+gSl+fxCot4mknC+6lI9RazJ3NYJB1t9E6SkIMy3Kk9em92HjFxzclHKQ0q1nZDyppZyqIGu425g46rIow==",
+      "type": "package",
+      "path": "sharpraven/2.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/SharpRaven.dll",
+        "lib/net40/SharpRaven.dll",
+        "lib/net45/SharpRaven.dll",
+        "lib/net471/SharpRaven.dll",
+        "lib/netstandard2.0/SharpRaven.dll",
+        "sharpraven.2.4.0.nupkg.sha512",
+        "sharpraven.nuspec"
+      ]
+    },
     "Swashbuckle.AspNetCore/4.0.1": {
       "sha512": "k8TzWTpjwO+4xXsMaaAsAPAdYKyM5wuRvSP+ZmgtyXwhW45ChBVq3xdVJ8Tz+hQ0ziBZSh5p6r2dkRN6SyasVA==",
       "type": "package",
@@ -8591,6 +8737,27 @@
         "lib/portable-net45+win8+wp8+wpa81/System.Composition.TypedParts.dll",
         "system.composition.typedparts.1.0.31.nupkg.sha512",
         "system.composition.typedparts.nuspec"
+      ]
+    },
+    "System.Configuration.ConfigurationManager/4.4.0": {
+      "sha512": "RLYB3YOmdz9dE3zMhBFGv3GF74upGjH0nF0G9lFFRLNLsCEMIpiuQsMGv2qE0qdp1JdheVNO8RIRpUKdokiK+g==",
+      "type": "package",
+      "path": "system.configuration.configurationmanager/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Configuration.ConfigurationManager.dll",
+        "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.dll",
+        "ref/net461/System.Configuration.ConfigurationManager.xml",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll",
+        "ref/netstandard2.0/System.Configuration.ConfigurationManager.xml",
+        "system.configuration.configurationmanager.4.4.0.nupkg.sha512",
+        "system.configuration.configurationmanager.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Console/4.3.0": {
@@ -11513,6 +11680,47 @@
         "system.security.cryptography.primitives.nuspec"
       ]
     },
+    "System.Security.Cryptography.ProtectedData/4.4.0": {
+      "sha512": "WwEexvBd+17yfY7fcS+fBGl+HADEfCJuKeDJqBT7D6j6vKwYvfLyGuq2y/MmrKORC6mbYwth7kjinO1mPhTL3g==",
+      "type": "package",
+      "path": "system.security.cryptography.protecteddata/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.dll",
+        "ref/net461/System.Security.Cryptography.ProtectedData.xml",
+        "ref/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/win/lib/net46/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/net461/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard1.3/System.Security.Cryptography.ProtectedData.dll",
+        "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll",
+        "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512",
+        "system.security.cryptography.protecteddata.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Security.Cryptography.X509Certificates/4.3.0": {
       "sha512": "t2Tmu6Y2NtJ2um0RtcuhP7ZdNNxXEgUm2JeoA/0NvlMjAhKCnM1NX07TDl3244mVp3QU6LPEhT3HTtH1uF7IYw==",
       "type": "package",
@@ -12634,6 +12842,8 @@
       "Microsoft.EntityFrameworkCore >= 2.1.4",
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.1",
+      "Sentry >= 1.1.0",
+      "SharpRaven >= 2.4.0",
       "Swashbuckle.AspNetCore >= 4.0.1"
     ]
   },
@@ -12698,6 +12908,14 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "Sentry": {
+            "target": "Package",
+            "version": "[1.1.0, )"
+          },
+          "SharpRaven": {
+            "target": "Package",
+            "version": "[2.4.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
