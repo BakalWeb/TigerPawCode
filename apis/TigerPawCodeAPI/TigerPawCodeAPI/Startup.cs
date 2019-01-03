@@ -66,8 +66,7 @@ namespace TigerPawCodeAPI
 
             // configurations
             services.AddSingleton(Configuration.GetSection("Identity").Get<IdentityConfiguration>()); // identity
-            services.AddSingleton(Configuration.GetSection("Sentry").Get<SentryConfiguration>()); // identity
-            //services.Configure<Infrastructure.Configurations.SentryOptions>(Configuration.GetSection("Sentry")); // logging
+            services.AddSingleton(Configuration.GetSection("Sentry").Get<SentryConfiguration>()); // logging
 
             // services
             services.AddTransient<IAuthService, AuthService>();
