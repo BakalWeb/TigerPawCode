@@ -83,10 +83,18 @@ header {
   border-bottom: 1px dashed $secondary-orange;
   margin-bottom: 20px;
 
-  .logo-name {
+
+  h2.logo-name {
+    margin-bottom: 0;
     a {
       color: $light-grey;
-      font-family: $heading-font;
+      font-family: $brand-font-secondary;
+
+      font-size: 1.2em;
+
+      span {
+        color: #989da8;
+      }
 
       &:hover {
         text-decoration: none;
@@ -94,6 +102,10 @@ header {
         transition: all 1s;
       }
     }
+  }
+
+  small {
+    margin-left: 6px;
   }
 }
 
