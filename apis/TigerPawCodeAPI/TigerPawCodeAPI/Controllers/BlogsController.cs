@@ -10,7 +10,6 @@ using TigerPawCodeAPI.Services.Interfaces;
 
 namespace TigerPawCodeAPI.Controllers
 {
-    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogsController : ControllerBase

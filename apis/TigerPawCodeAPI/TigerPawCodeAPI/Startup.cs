@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Sentry;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TigerPawCodeAPI.Infrastructure.Configurations;
 using TigerPawCodeAPI.Infrastructure.Middleware;
 using TigerPawCodeAPI.Models;
@@ -33,6 +35,9 @@ namespace TigerPawCodeAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAutoMapper();
+
+            // cors
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -42,25 +47,44 @@ namespace TigerPawCodeAPI
                         .AllowCredentials());
             });
 
-            // authentication
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
+            // configure jwt authentication
+            var key = Encoding.ASCII.GetBytes("supersimplejhMaj381");
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
                     {
-                        options.TokenValidationParameters = new TokenValidationParameters
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
+                        var userId = int.Parse(context.Principal.Identity.Name);
+                        var user = userService.GetById(userId);
+                        if (user == null)
                         {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-
-                            ValidIssuer = "https://localhost:5001",
-                            ValidAudience = "https://localhost:5001",
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersimplejhMaj381"))
-                        };
-                    });
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             // sql connection
-            string connection = @"Server=tcp:tigerpawcode.database.windows.net,1433;Initial Catalog=tiger-paw-code;Persist Security Info=False;User ID=bakalweb;Password=NddM*8qEWd9%JwZE; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connection = @"Server=(localdb)\mssqllocaldb;Initial Catalog=tiger-paw-code;Persist Security Info=False;User ID=bakalweb;Password=NddM*8qEWd9%JwZE;";
+            //string connection = @"Server=tcp:tigerpawcode.database.windows.net,1433;Initial Catalog=tiger-paw-code;Persist Security Info=False;User ID=bakalweb;Password=NddM*8qEWd9%JwZE; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<DataContext>
                 (options => options.UseSqlServer(connection));
 
@@ -68,16 +92,20 @@ namespace TigerPawCodeAPI
             services.AddSingleton(Configuration.GetSection("Identity").Get<IdentityConfiguration>()); // identity
             services.AddSingleton(Configuration.GetSection("Sentry").Get<SentryConfiguration>()); // logging
 
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
             // services
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBlogService, BlogService>();
             services.AddScoped<IErrorHandler, ErrorHandler>();
+            services.AddScoped<IUserService, UserService>();
 
             // swagger
             services.AddSwaggerGen(c =>
             {
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "TigerPawCode API", Version = "v1" });
             });
 
         }
@@ -104,7 +132,7 @@ namespace TigerPawCodeAPI
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TigerPawCode API");
                 //c.RoutePrefix = string.Empty;
             });
 

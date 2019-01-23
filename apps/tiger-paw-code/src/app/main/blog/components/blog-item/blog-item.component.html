@@ -1,6 +1,7 @@
+
+      <app-banner [banner]="banner" *ngIf='banner'></app-banner>
 <div class="container blogs">
   <mat-card *ngIf='blog'>
-      <app-banner [banner]="banner" *ngIf='banner'></app-banner>
     <mat-card-content>
       <!-- <p class="">
         <span class="small">{{ blog.author | titlecase }}</span>

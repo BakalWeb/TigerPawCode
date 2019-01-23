@@ -80,13 +80,46 @@
     color: $primary-orange;
   }
 
+  .header-normal {
+    background: #fff;
+    transition: all 0.5s;
+    height: 110px;
+    padding-top: 20px;
+
+    .logo-name-span {
+      z-index: 2;
+      position: relative;
+    }
+    .logo {
+      max-width: 50px;
+      margin-left: -12px;
+      z-index: 1;
+    }
+  }
+
+  .header-shrink {
+    background: #fff;
+    position: fixed;
+    transition: all .5s;
+    height: 65px;
+    z-index: 9999;
+    padding-right: 10px;
+
+    .logo {
+      max-width: 40px;
+      z-index: 1;
+      margin: 0 auto 0 auto;
+      margin: 10px;
+    }
+  }
+
   .header-buttons {
 
-    .header-button {
+   /* .header-button {
       float: right;
       display: inline-table;
       margin: 10px;
       display: flex;
-    }
+    } */
   }
 }

@@ -105,8 +105,27 @@ namespace TigerPawCodeAPI.Migrations
            nibh eget elementum sollicitudin, libero justo cursus leo, sit amet fermentum dolor nisl eu est. Aenean
            elementum pretium justo vitae elementum. Aenean vel velit sem.
          Etiam hendrerit in est ut mattis.</p>
-", DateCreated = new DateTime(2019, 1, 2, 11, 27, 16, 392, DateTimeKind.Local), DateLive = new DateTime(2019, 1, 2, 11, 27, 16, 395, DateTimeKind.Local), EstimatedReadingTime = 10, Headline = "Working with Angular", Promoted = false, ShortDescription = "Tips on working with Angular", Status = 1, Thumbnail = "https = //www.fillmurray.com/g/140/100" }
+", DateCreated = new DateTime(2019, 1, 23, 8, 24, 11, 634, DateTimeKind.Local), DateLive = new DateTime(2019, 1, 23, 8, 24, 11, 640, DateTimeKind.Local), EstimatedReadingTime = 10, Headline = "Working with Angular", Promoted = false, ShortDescription = "Tips on working with Angular", Status = 1, Thumbnail = "https = //www.fillmurray.com/g/140/100" }
                     );
+                });
+
+            modelBuilder.Entity("TigerPawCodeAPI.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Admin");
+
+                    b.Property<DateTime>("RoleCreated");
+
+                    b.Property<DateTime?>("RoleDeleted");
+
+                    b.Property<string>("RoleName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("TigerPawCodeAPI.Models.Subscriber", b =>
@@ -124,6 +143,50 @@ namespace TigerPawCodeAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subscribers");
+                });
+
+            modelBuilder.Entity("TigerPawCodeAPI.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Password");
+
+                    b.Property<byte[]>("PasswordHash");
+
+                    b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<int?>("RoleId");
+
+                    b.Property<bool>("Subscribed");
+
+                    b.Property<DateTime?>("UserDeleted");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TigerPawCodeAPI.Models.User", b =>
+                {
+                    b.HasOne("TigerPawCodeAPI.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

@@ -55,7 +55,7 @@ namespace TigerPawCodeAPI.Services.Implementations
             if (await GetBlog(model.Id) != null) return null;
 
             // assign a datelive if status equals published
-            model.DateLive = (model.Status == BlogItemStatus.published && model.DateLive == null) ? DateTime.Now : (DateTime?) null;
+            model.DateLive = (model.Status == BlogItemStatus.published && model.DateLive == null) ? DateTime.Now : (DateTime?)null;
             // assign estimated reading time
             model.EstimatedReadingTime = ReadingTime.CalculateEstimatedReadingTime(model.Content);
 

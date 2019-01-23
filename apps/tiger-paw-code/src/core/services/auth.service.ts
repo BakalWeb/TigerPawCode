@@ -26,7 +26,7 @@ export class AuthService {
   login(login: UserLogin) {
     try {
       this.logout();
-    return this.http.post(`${this.apiUrl}/auth/login`, login).pipe(
+    return this.http.post(`${this.apiUrl}/user/authenticate`, login).pipe(
       map(token => {
         // login successful if there's a jwt token in the response
         if (token) {

@@ -8,7 +8,7 @@ import { Banner } from '@core/interfaces/banner.interface';
 })
 export class HomeComponent implements OnInit {
   banner: Banner = {
-    image: 'business-1.jpg',
+    image: null,
     heading: 'What is Tiger Paw Code',
     text: 'Find out how this site came to be',
     blogItem: false

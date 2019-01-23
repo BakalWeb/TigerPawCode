@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener} from '@angular/core';
+import { Component, ViewChild, HostListener, AfterViewInit} from '@angular/core';
 import { MenuItems } from '@core/static/menu';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -16,6 +16,9 @@ export class AppComponent {
   currentLocation: string; // used as page name
   @ViewChild('sidenav') sidenav: MatSidenav;
 
+  // shrinking header
+  headerClass = 'header-normal';
+
   constructor(private router: Router, private location: Location,
     private notification: NotificationService) {
     this.router.events.subscribe(event => {
@@ -25,5 +28,15 @@ export class AppComponent {
 
   sidenavToggle(): void {
     this.sidenav.toggle();
+  }
+
+  shrinkHeader(event) {
+    const shrinkHeaderAtValue = 40;
+    if (event > shrinkHeaderAtValue) {
+     this.headerClass = 'header-shrink';
+     return;
+    }
+
+    this.headerClass = 'header-normal';
   }
 }

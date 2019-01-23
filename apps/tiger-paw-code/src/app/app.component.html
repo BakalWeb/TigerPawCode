@@ -18,46 +18,35 @@
 
     <div class="row no-margin">
       <div class="sidenav-bottom-wrapper">
-            <a href="login" class="text-center">Login</a>
-            <a href="login" class="text-center">Register</a>
+        <a href="login" class="text-center">Login</a>
+        <a href="login" class="text-center">Register</a>
       </div>
     </div>
   </mat-sidenav>
 
-  <mat-sidenav-content class="content-container">
-    <header>
-      <div class="container">
-        <div class="row">
-          <div class="col-6">
-            <h2 class="logo-name"><a href="home"><span>T</span>iger<span>P</span>aw<span>C</span>ode</a></h2>
-            <small>Tales of a dyslexic coder</small>
-          </div>
-          <div class="col-6 header-buttons">
-              <button mat-button class="nav-item nav-link header-button" (click)="sidenavToggle()">
-                  <mat-icon class="menu-icon">{{ menuIcon }}</mat-icon>
-                </button>
-            <app-login-header class="header-button" *ngIf="currentLocation !== 'login'"></app-login-header>
-
-          </div>
-          <div class="col-4">
-
-          </div>
-          <!--   <div class="col">
-
-        <div class="btn-group align-right top-nav-buttons" role="group">
-
-              <app-message-chip></app-message-chip>
-
+  <mat-sidenav-content appScrollHeader (smallHeader)="shrinkHeader($event)">
+    <div class="content-container">
+      <header [class]="headerClass">
+        <div class="container">
+          <div class="row">
+            <div class="col-10">
+              <h2 class="logo-name"><a href="home"><span class="logo-name-span" *ngIf="headerClass !== 'header-shrink'"><span>T</span>IGER<span>P</span>AW<span>C</span>ODE</span>
+                  <span><img src="assets/tiger-paw-logo.png" alt="Tiger Paw Code logo" class="logo" /></span></a></h2>
+              <small *ngIf="headerClass !== 'header-shrink'">Tales of a dyslexic coder</small>
             </div>
-
-          </div>-->
+            <div class="col-2">
+              <app-login-header></app-login-header>
+              <button mat-button class="nav-item nav-link header-button" (click)="sidenavToggle()">
+                <mat-icon class="menu-icon">{{ menuIcon }}</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
 
-    </header>
+      </header>
 
-    <router-outlet></router-outlet>
-
+      <router-outlet></router-outlet>
+    </div>
     <footer></footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
