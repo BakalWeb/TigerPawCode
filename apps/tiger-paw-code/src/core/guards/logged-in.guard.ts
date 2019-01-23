@@ -25,6 +25,7 @@ export class LoggedInGuard implements CanActivate {
       try {
         const currentUser = this._authService.currentUserValue;
         if (currentUser) {
+          console.log(`Activated Route Guard: ${currentUser}`);
             return true;
         }
 

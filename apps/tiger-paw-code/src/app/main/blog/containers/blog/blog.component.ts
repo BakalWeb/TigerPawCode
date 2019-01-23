@@ -12,9 +12,6 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 export class BlogComponent implements OnInit {
   blogs: BlogItem[];
 
-  @ViewChild(CdkVirtualScrollViewport)
-  viewport: CdkVirtualScrollViewport;
-
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {

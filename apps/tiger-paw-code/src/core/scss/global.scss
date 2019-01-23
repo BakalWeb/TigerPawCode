@@ -28,6 +28,14 @@ a {
   color: $primary-orange;
 }
 
+.mat-spinner {
+  position: fixed !important;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px !important;
+    margin-left: -50px !important;
+  z-index: 999;
+}
 .content-container,
 .sidebar-container {
   min-height: 100%;
@@ -62,7 +70,8 @@ a {
   background: #eee;
 }
 .grey-2 {
-  background: #d6d6d6;
+  background: #eaeaea;
+  /*background: #d6d6d6;*/
 }
 .grey-3 {
   background: #bebebe;
@@ -78,22 +87,33 @@ a {
 ============================================================================
 --------------------------------------------------------------------------*/
 header {
-  padding: 20px 0;
+
   width: 100%;
   border-bottom: 1px dashed $secondary-orange;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
-  .logo-name {
+  h2.logo-name {
+    margin-bottom: 0;
     a {
-      color: $light-grey;
-      font-family: $heading-font;
+      color: $dark-grey;
+      font-family: $brand-font-secondary;
+
+      font-size: 1.2em;
+
+      span {
+        color: #989da8;
+      }
 
       &:hover {
         text-decoration: none;
-        color: $dark-grey;
+        color: $light-grey;
         transition: all 1s;
       }
     }
+  }
+
+  small {
+    margin-left: 6px;
   }
 }
 

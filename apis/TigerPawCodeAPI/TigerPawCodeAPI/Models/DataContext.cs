@@ -9,6 +9,8 @@ namespace TigerPawCodeAPI.Models
 
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

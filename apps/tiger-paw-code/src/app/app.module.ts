@@ -18,9 +18,10 @@ import { EscapeHtmlPipe } from '@core/pipes/keep-html.pipe';
 import { UserService } from '@core/services/user.service';
 import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
 import { LogService } from '@core/services/log.service';
+import { ScrollHeaderDirective } from '@core/directives/scroll-header.directive';
 
 @NgModule({
-  declarations: [AppComponent, EscapeHtmlPipe],
+  declarations: [AppComponent, EscapeHtmlPipe, ScrollHeaderDirective],
   imports: [
     BrowserModule,
     AppRoutingModule,
