@@ -19,7 +19,7 @@
     <div class="row no-margin">
       <div class="sidenav-bottom-wrapper">
         <a href="login" class="text-center">Login</a>
-        <a href="login" class="text-center">Register</a>
+        <a href="register" class="text-center">Register</a>
       </div>
     </div>
   </mat-sidenav>
@@ -29,16 +29,16 @@
       <header [class]="headerClass">
         <div class="container">
           <div class="row">
-            <div class="col-10">
+            <div class="col-7 col-sm-8">
               <h2 class="logo-name"><a href="home"><span class="logo-name-span" *ngIf="headerClass !== 'header-shrink'"><span>T</span>IGER<span>P</span>AW<span>C</span>ODE</span>
-                  <span><img src="assets/tiger-paw-logo.png" alt="Tiger Paw Code logo" class="logo" /></span></a></h2>
+                  <span><img src="assets/tiger-paw-logo.png" alt="Tiger Paw Code logo" class="logo img-fluid" /></span></a></h2>
               <small *ngIf="headerClass !== 'header-shrink'">Tales of a dyslexic coder</small>
             </div>
-            <div class="col-2">
-              <app-login-header></app-login-header>
+            <div class="col-5 col-sm-4">
               <button mat-button class="nav-item nav-link header-button" (click)="sidenavToggle()">
                 <mat-icon class="menu-icon">{{ menuIcon }}</mat-icon>
               </button>
+              <app-login-header class="d-none d-sm-block header-button"></app-login-header>
             </div>
           </div>
         </div>

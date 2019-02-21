@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: './main/blog/blog.module#BlogModule'
   },
   {
+    path: 'register',
+    loadChildren: './main/register/register.module#RegisterModule'
+  },
+  {
     path: 'admin',
     loadChildren: './main/admin/admin.module#AdminModule',
     canActivate: [LoggedInGuard]

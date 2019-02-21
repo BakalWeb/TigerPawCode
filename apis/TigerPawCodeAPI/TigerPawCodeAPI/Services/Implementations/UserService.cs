@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using TigerPawCodeAPI.Infrastructure.Helpers;
 using TigerPawCodeAPI.Models;
@@ -63,6 +64,7 @@ namespace TigerPawCodeAPI.Services.Implementations
             user.PasswordSalt = passwordSalt;
             user.DateCreated = DateTime.Now;
             user.LastModified = DateTime.Now;
+            user.Role = _context.Roles.FirstOrDefault(x => x.RoleName.ToLower().Equals("registered"));
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -151,5 +153,36 @@ namespace TigerPawCodeAPI.Services.Implementations
             return true;
         }
 
+        /// <summary>
+        /// Check to see if the username entered is taken or not and if it meets certain criteria
+        /// </summary>
+        /// <param name="value">Username</param>
+        /// <returns>Bool value dictating if the username entered was valid or not</returns>
+        public bool ValidUsername(string value)
+        {
+            try
+            {
+                // check if value already exists
+                var result = _context.Users.Any(x => x.Username.ToLower().Equals(value));
+                if (result)
+                    return false;
+
+                // valid length
+                if (value.Length > 150)
+                    return false;
+
+                // contains invalid characters
+                var encodedResult = HtmlEncoder.Default.Encode(value);
+                if (value != encodedResult)
+                    return false;
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

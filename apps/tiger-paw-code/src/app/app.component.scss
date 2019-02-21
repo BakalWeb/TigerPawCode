@@ -113,13 +113,15 @@
     }
   }
 
-  .header-buttons {
-
+    .header-button {
+      float: right;
+      display: flex;
+    }
    /* .header-button {
       float: right;
       display: inline-table;
       margin: 10px;
       display: flex;
     } */
-  }
+
 }

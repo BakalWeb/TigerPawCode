@@ -9,8 +9,9 @@
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
-    background-size: cover; /* or contain depending on what you want */
-    position:relative;
+    background-size: cover;
+    /* or contain depending on what you want */
+    position: relative;
 
     &::before {
       content: "";
@@ -20,37 +21,33 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.7);
       transition: all .3s linear;
-      opacity: 0.9;
+      opacity: 0.5;
       z-index: 2;
       background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center top;
+      background-attachment: fixed;
+      background-position: center top;
     }
 
     p {
-      background: #fff;
+      padding-lefT: 10px;
       color: #404040;
-      z-index: 4;
-      display: inline;
-      padding: 10px 5px;
-      vertical-align: middle;
-      position: absolute;
-      top: 30%;
-      left: 10%;
       font-size: 1.65em;
     }
 
     h2 {
-      background: #fff;
-      z-index: 4;
-      display: inline;
-      padding: 10px 5px;
-      vertical-align: middle;
-      position: absolute;
-      top: 5%;
-      left: 10%;
+      padding: 15px 0;
+
+
+    }
+
+    h2, p {
+      span {
+        border-left: 2px dashed #F79256;
+        padding: 5px;
+        background: #fff;
+      }
     }
   }
 }

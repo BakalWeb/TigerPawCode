@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { User } from '@core/models/user';
 import { UserService } from '@core/services/user.service';
@@ -9,16 +9,20 @@ import { Router } from '@angular/router';
   selector: 'app-login-header',
   styleUrls: ['./login.component.scss'],
   template: `
-    <div *ngIf="loggedIn && user; else: login">
-      {{ user.username }} <a href="home" (click)="logout()">Logout</a>
+    <div *ngIf="loggedIn; else: login">
+     <!-- {{ user.username }} -->
+     <a href="home" class="header-button-login" (click)="logout()">Logout</a>
     </div>
 
-    <ng-template #login>
-      <a href="login">Login</a>
+  <ng-template class="login-container" #login>
+      <p><a href="login" class="header-button-login">Login</a>
+      <span class="divider">\\</span>
+       <a href="register" class="header-button-login">Register</a></p>
     </ng-template>
   `
 })
-export class LoginHeaderComponent implements OnInit {
+export class LoginHeaderComponent implements AfterViewInit {
+
   message: string;
   user: UserLogin;
   loggedIn = false;
@@ -28,11 +32,16 @@ export class LoginHeaderComponent implements OnInit {
     private authService: AuthService
   ) {
     this.message = '';
+
+    this.user = this.authService.currentUserValue;
+    this.loggedIn = this.authService.currentUserValue !== null ? true : false;
   }
 
-  ngOnInit() {
+
+
+  ngAfterViewInit(): void {
     this.user = this.authService.currentUserValue;
-    this.loggedIn = this.authService.currentUserValue ? true : false;
+    this.loggedIn = this.authService.currentUserValue !== null ? true : false;
   }
 
   logout(): void {

@@ -24,8 +24,8 @@ export class LoggedInGuard implements CanActivate {
   canActivate() {
       try {
         const currentUser = this._authService.currentUserValue;
-        if (currentUser) {
-          console.log(`Activated Route Guard: ${currentUser}`);
+        if (currentUser && currentUser.expiry > new Date()) {
+          console.log(`Activated Route Guard found user. JWT Expires: ${currentUser.expiry}`);
             return true;
         }
 
