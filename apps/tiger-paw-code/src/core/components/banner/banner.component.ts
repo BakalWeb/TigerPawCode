@@ -11,8 +11,8 @@ import { ImageAssets } from '@core/static/image-assets';
           [style.background-image]="'url(assets/images/' + banner.image + ')'"
         >
         <div class="container">
-        <h2>{{ banner.heading }}</h2>
-        <p>{{ banner.text }}</p>
+        <h2><span>{{ banner.heading }}</span></h2>
+        <p><span>{{ banner.text }}</span></p>
       </div>
       </div>
     </div>

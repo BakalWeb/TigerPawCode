@@ -25,13 +25,15 @@ namespace TigerPawCodeAPI.Controllers
     {
         private readonly IUserService _userService;
         private IMapper _mapper;
+        private IErrorHandler _errorHandler;
         private readonly AppSettings _appSettings;
 
-        public UserController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings)
+        public UserController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings, IErrorHandler errorHandler)
         {
             _userService = userService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
+            _errorHandler = errorHandler ?? throw new NotImplementedException(nameof(errorHandler));
         }
 
         [AllowAnonymous]
@@ -64,7 +66,8 @@ namespace TigerPawCodeAPI.Controllers
                 Username = user.Username,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = tokenString
+                Token = tokenString,
+                Expiry = DateTime.Now.AddMinutes(1)
             });
         }
 
@@ -78,13 +81,10 @@ namespace TigerPawCodeAPI.Controllers
 
             try
             {
-                // save 
-                _userService.Create(user);
-                return Ok();
+                return Ok(_userService.Create(user));
             }
             catch (AppException ex)
             {
-                // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
         }
@@ -130,6 +130,21 @@ namespace TigerPawCodeAPI.Controllers
         {
             _userService.Delete(id);
             return Ok();
+        }
+
+        [HttpGet("username/{username}")]
+        public IActionResult ValidUsername(string username)
+        {
+            try
+            {
+                var result = _userService.ValidUsername(username);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _errorHandler.CaptureAsync(e);
+                return BadRequest(e);
+            }
         }
     }
 }

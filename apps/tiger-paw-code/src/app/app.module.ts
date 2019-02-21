@@ -32,7 +32,7 @@ import { ScrollHeaderDirective } from '@core/directives/scroll-header.directive'
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonComponentsModule
+    CommonComponentsModule,
     // InMemoryWebApiModule.forRoot(FakeApiService, {
     //   passThruUnknownUrl: true
     // })

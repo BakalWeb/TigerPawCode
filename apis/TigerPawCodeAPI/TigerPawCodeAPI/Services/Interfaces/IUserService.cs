@@ -20,5 +20,7 @@ namespace TigerPawCodeAPI.Services.Interfaces
         User Update(User user);
 
         bool Delete(int id);
+
+        bool ValidUsername(string value);
     }
 }

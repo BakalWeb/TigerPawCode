@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row row-eq-height">
+    <div class="col-sm-6 offset-sm-3">
+      <mat-card class="col">
+        <mat-card-title>Register</mat-card-title>
+        <form [formGroup]='registerForm' (ngSubmit)="register()">
+          <mat-form-field class="sidebyside">
+            <input matInput placeholder="First name" formControlName='firstName' autocomplete="given-name" autofocus tabindex="1">
+          </mat-form-field>
+          <mat-form-field class="sidebyside">
+            <input matInput placeholder="Last name" formControlName='lastName' autocomplete="family-name" tabindex="2">
+          </mat-form-field>
+          <mat-form-field class="max-width">
+            <input matInput placeholder="Email" formControlName='email' autocomplete="email" tabindex="3">
+          </mat-form-field>
+          <mat-form-field class="max-width">
+            <input matInput placeholder="Desired username" formControlName='username' autocomplete="username" tabindex="4">
+          </mat-form-field>
+          <span *ngIf="registerForm.controls.username?.errors?.InvalidUsername">Username has already been taken</span>
+          <mat-form-field class="max-width">
+            <input matInput placeholder="Password" formControlName='password' type="password" autocomplete="current-password" tabindex="5">
+          </mat-form-field>
+          <hr />
+          <div class="max-width">
+            <button mat-raised-button type="submit" class="primary" tabindex="6">Register</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

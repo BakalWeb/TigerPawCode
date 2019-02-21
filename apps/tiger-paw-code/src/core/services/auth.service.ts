@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { of, Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { UserLogin } from '@core/models/user-login';
 import { environment } from '@env/environment';
 import { map } from 'rxjs/operators';
-import { User } from '@core/models/user';
 import { LogService } from './log.service';
 
 @Injectable({
@@ -16,9 +15,7 @@ export class AuthService {
   private apiUrl: string;
 
   constructor(private http: HttpClient, private logService: LogService) {
-    this.apiUrl = environment.inMemory
-      ? environment.inMemoryApiUrl
-      : environment.apiUrl;
+    this.apiUrl = environment.inMemory ? environment.inMemoryApiUrl : environment.apiUrl;
     this.currentUserSubject = new BehaviorSubject<UserLogin>(JSON.parse(localStorage.getItem('jwt')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
