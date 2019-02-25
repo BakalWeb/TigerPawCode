@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '@core/services/message.service';
-import { AuthService } from '@core/services/auth.service';
 import { MessageItem } from '@core/models/message-item';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
@@ -17,7 +16,6 @@ export class MessagesComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private authService: AuthService
   ) {}
 
   ngOnInit() {

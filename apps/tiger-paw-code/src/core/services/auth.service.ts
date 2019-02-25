@@ -1,62 +1,107 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserLogin } from '@core/models/user-login';
 import { environment } from '@env/environment';
-import { map } from 'rxjs/operators';
-import { LogService } from './log.service';
+import { map, catchError } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<UserLogin>;
-  public currentUser: Observable<UserLogin>; // this will need changing to user at some point
   private apiUrl: string;
+  public JWT_TOKEN_NAME = 'tigerpawcode-jwt';
+  // public isLoginSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
 
-  constructor(private http: HttpClient, private logService: LogService) {
-    this.apiUrl = environment.inMemory ? environment.inMemoryApiUrl : environment.apiUrl;
-    this.currentUserSubject = new BehaviorSubject<UserLogin>(JSON.parse(localStorage.getItem('jwt')));
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private http: HttpClient, private notificationService: NotificationService) {
+    this.apiUrl = environment.inMemory
+    ? environment.inMemoryApiUrl
+    : environment.apiUrl;
   }
 
-  login(login: UserLogin) {
-    try {
+  // allows log-in component to update subject
+  public setLoginSubject(val: boolean) {
+    // this.isLoginSubject.next(val);
+  }
+
+  // returns user login from jwt
+  public getUserLogin(): UserLogin {
+    const token = localStorage.getItem(this.JWT_TOKEN_NAME);
+    return <UserLogin>JSON.parse(token);
+  }
+
+  // sets jwt
+  private setToken(token: string): void {
+    localStorage.setItem(this.JWT_TOKEN_NAME, token);
+  }
+
+  // determines if session has a token
+  private hasToken(): boolean {
+    return (localStorage.getItem(this.JWT_TOKEN_NAME)) ? true : false;
+  }
+
+  // returns date of jwt expiration
+  private getTokenExpirationDate(): Date {
+    return (this.getUserLogin()) ? this.getUserLogin().expiry : null;
+  }
+
+  // determines if jwt is expired
+  public isTokenExpired(): boolean {
+    const result =  (moment(this.getTokenExpirationDate()) > moment()) ? false : true;
+    if (result) {
       this.logout();
-    return this.http.post(`${this.apiUrl}/user/authenticate`, login).pipe(
-      map(token => {
-        // login successful if there's a jwt token in the response
-        if (token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('jwt', JSON.stringify(token));
-          this.currentUserSubject.next(login);
-        }
-
-        return login;
-      })
-    );
-    } catch (error) {
-      this.logService.handleError(error);
     }
+
+    return result;
   }
 
-  public get currentUserValue(): UserLogin {
-    return this.currentUserSubject.value;
+  // public isUserLoggedIn(): Observable<boolean> {
+  //   return this.isLoginSubject.asObservable();
+  // }
+
+  private isLoggedIn(): boolean {
+    let result = false;
+
+    // determines if a user has a token
+    if (!this.hasToken()) {
+      // this.isLoginSubject.next(false);
+      return result;
+    }
+    // determines if user token has expired
+    if (!this.getTokenExpirationDate()) {
+      // this.isLoginSubject.next(false);
+      return result;
+    }
+
+    // checks if token is expired
+    result = this.isTokenExpired();
+
+    // this.isLoginSubject.next(result);
+    return result;
+  }
+
+  public logout() {
+    // this.isLoginSubject.next(false);
+    localStorage.removeItem(this.JWT_TOKEN_NAME);
+  }
+
+  public login(user: UserLogin): Observable<UserLogin> {
+    // first logout
+    this.logout();
+
+    // call api for auth result
+    return this.http.post<UserLogin>(`${this.apiUrl}/user/authenticate`, user)
+      .pipe(
+        map(
+          userLogin => {
+            if (userLogin) {
+              localStorage.setItem(this.JWT_TOKEN_NAME, JSON.stringify(userLogin));
+            }
+            return userLogin;
+          }
+        )
+      );
+  }
 }
-
-  logout(): any {
-    // remove user from local storage to log user out
-    localStorage.removeItem('jwt');
-    this.currentUserSubject.next(null);
-  }
-
-  loggedInJwt(): string {
-    return localStorage.getItem('jwt') != null
-      ? localStorage.getItem('jwt')
-      : null;
-  }
-}
-
-export const AUTH_PROVIDERS: Array<any> = [
-  { provide: AuthService, useClass: AuthService }
-];

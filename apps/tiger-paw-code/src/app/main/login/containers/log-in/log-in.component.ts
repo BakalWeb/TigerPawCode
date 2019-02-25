@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
+import { AuthService } from '@core/services/auth.service';
+import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,8 +16,8 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private notificationService: NotificationService,
     private authService: AuthService,
-    private notification: NotificationService,
     private router: Router
   ) {}
 
@@ -28,27 +29,30 @@ export class LogInComponent implements OnInit {
     this.loginForm = this.fb.group({
       username: ['bakalweb', Validators.required],
       password: ['wonderfulgrape2', Validators.required],
-      // rememberMe: [true]
     });
   }
 
   logIn(): void {
-    let success: boolean;
-    this.authService.login((Object.assign({}, this.loginForm.value)))
-    .subscribe(res => {
-      success = res ? true : false;
-    }, error => {
-      console.error(error);
-    }, () => {
-    // todo handle the remember me formcontrol
-    if (!success) {
-      this.notification.generateSnackbarNotification(
-        'Login failed. Username or password incorrect.'
-      );
-      return;
+    if (this.loginForm.invalid) {
+      this.notificationService.generateSnackbarNotification('Invalid login, please try again');
+        return;
     }
 
-    this.router.navigateByUrl('home');
-    });
+    this.authService.login(Object.assign({}, this.loginForm.value))
+      .subscribe(
+        data => {
+          this.authService.setLoginSubject(true);
+          this.router.navigate(['home']);
+        },
+        error => {
+          this.authService.setLoginSubject(false);
+          if (error.status === 401) {
+            this.notificationService.generateSnackbarNotification('Invalid login, please try again');
+          } else {
+            this.notificationService.generateSnackbarNotification('There was an error trying to log you in, please try again');
+            console.log(error);
+          }
+
+        });
   }
 }

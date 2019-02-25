@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './main/home/containers/home/home.component';
-import { LoggedInGuard } from '@core/guards/logged-in.guard';
+import { AuthGuard } from '@core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -28,23 +28,27 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: './main/admin/admin.module#AdminModule',
-    canActivate: [LoggedInGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
     loadChildren: './main/profile/profile.module#ProfileModule',
-    canActivate: [LoggedInGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'timeline',
     loadChildren: './main/timeline/timeline.module#TimelineModule',
-    canActivate: [LoggedInGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'messages',
     loadChildren: './main/messages/messages.module#MessagesModule',
-    canActivate: [LoggedInGuard]
-  }
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'tiger',
+    loadChildren: './main/tiger/tiger.module#TigerModule'
+  },
   ];
 
 @NgModule({
