@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserLogin } from '@core/models/user-login';
 import { environment } from '@env/environment';
-import { map, catchError } from 'rxjs/operators';
-import { NotificationService } from './notification.service';
+import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Injectable({
@@ -13,17 +12,12 @@ import * as moment from 'moment';
 export class AuthService {
   private apiUrl: string;
   public JWT_TOKEN_NAME = 'tigerpawcode-jwt';
-  // public isLoginSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+  public loginSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, private notificationService: NotificationService) {
+  constructor(private http: HttpClient) {
     this.apiUrl = environment.inMemory
     ? environment.inMemoryApiUrl
     : environment.apiUrl;
-  }
-
-  // allows log-in component to update subject
-  public setLoginSubject(val: boolean) {
-    // this.isLoginSubject.next(val);
   }
 
   // returns user login from jwt
@@ -32,13 +26,8 @@ export class AuthService {
     return <UserLogin>JSON.parse(token);
   }
 
-  // sets jwt
-  private setToken(token: string): void {
-    localStorage.setItem(this.JWT_TOKEN_NAME, token);
-  }
-
   // determines if session has a token
-  private hasToken(): boolean {
+  public hasToken(): boolean {
     return (localStorage.getItem(this.JWT_TOKEN_NAME)) ? true : false;
   }
 
@@ -49,41 +38,30 @@ export class AuthService {
 
   // determines if jwt is expired
   public isTokenExpired(): boolean {
-    const result =  (moment(this.getTokenExpirationDate()) > moment()) ? false : true;
-    if (result) {
-      this.logout();
-    }
-
+    const result =  (moment(this.getTokenExpirationDate()) < moment()) ? true : false;
     return result;
   }
 
-  // public isUserLoggedIn(): Observable<boolean> {
-  //   return this.isLoginSubject.asObservable();
-  // }
-
-  private isLoggedIn(): boolean {
+  public isLoggedIn(): Observable<boolean> {
     let result = false;
 
     // determines if a user has a token
     if (!this.hasToken()) {
-      // this.isLoginSubject.next(false);
-      return result;
-    }
-    // determines if user token has expired
-    if (!this.getTokenExpirationDate()) {
-      // this.isLoginSubject.next(false);
-      return result;
+      console.log('isLoggedIn', 'User doesnt have a token');
+      this.loginSubject.next(result);
+      return this.loginSubject.asObservable();
     }
 
     // checks if token is expired
     result = this.isTokenExpired();
 
-    // this.isLoginSubject.next(result);
-    return result;
+    // returns subject as an observable
+    this.loginSubject.next(result);
+    return this.loginSubject.asObservable();
   }
 
   public logout() {
-    // this.isLoginSubject.next(false);
+    this.loginSubject.next(false);
     localStorage.removeItem(this.JWT_TOKEN_NAME);
   }
 
@@ -97,6 +75,7 @@ export class AuthService {
         map(
           userLogin => {
             if (userLogin) {
+              this.loginSubject.next(true);
               localStorage.setItem(this.JWT_TOKEN_NAME, JSON.stringify(userLogin));
             }
             return userLogin;

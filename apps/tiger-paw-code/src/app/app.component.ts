@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NotificationService } from '@core/services/notification.service';
 import { MatSidenav } from '@angular/material';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,11 @@ export class AppComponent {
   // shrinking header
   headerClass = 'header-normal';
 
-  constructor(private router: Router, private location: Location,
-    private notification: NotificationService) {
+  constructor(private router: Router, private location: Location) {
     this.router.events.subscribe(event => {
       this.currentLocation = this.location.path().replace('/', '') === 'home' ? 'Tiger Paw Code' : this.location.path().replace('/', '');
      });
-  }
+    }
 
   sidenavToggle(): void {
     this.sidenav.toggle();

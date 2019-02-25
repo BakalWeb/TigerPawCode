@@ -18,17 +18,16 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     // check if they have a token at all
-    if (!this.authService.getUserLogin()) {
-      // this.router.navigate(['home']);
+    if (!this.authService.hasToken()) {
       this.notificationService.generateSnackbarNotification('You must be logged in to see this area');
       return false;
       // check token expiry
-    } else if (!this.authService.isTokenExpired()) {
-      return true;
-    }
-
-    // must have had a token that has now expired
+    } else if (this.authService.isTokenExpired()) {
+      this.authService.logout();
       this.notificationService.generateSnackbarNotification('Your session has expired, please log in again');
       return false;
+    }
+
+    return true;
   }
 }

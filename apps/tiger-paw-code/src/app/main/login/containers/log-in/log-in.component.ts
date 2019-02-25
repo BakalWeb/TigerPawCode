@@ -41,11 +41,9 @@ export class LogInComponent implements OnInit {
     this.authService.login(Object.assign({}, this.loginForm.value))
       .subscribe(
         data => {
-          this.authService.setLoginSubject(true);
           this.router.navigate(['home']);
         },
         error => {
-          this.authService.setLoginSubject(false);
           if (error.status === 401) {
             this.notificationService.generateSnackbarNotification('Invalid login, please try again');
           } else {

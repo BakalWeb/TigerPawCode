@@ -1,12 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserLogin } from '@core/models/user-login';
 import { AuthService } from '@core/services/auth.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-login-header',
   styleUrls: ['./login.component.scss'],
   template: `
-    <div *ngIf="loggedIn; else: login">
+    <div *ngIf="(loggedIn | async); else: login">
      <!-- {{ user.username }} -->
      <a href="home" class="header-button-login" (click)="logout()">Logout</a>
     </div>
@@ -21,14 +22,12 @@ import { AuthService } from '@core/services/auth.service';
 export class LoginHeaderComponent implements OnInit, AfterViewInit {
   message: string;
   user: UserLogin;
-  loggedIn = false;
+  loggedIn: Observable<boolean>;
 
   constructor(
     private authService: AuthService
   ) {
-    // this.authService.isUserLoggedIn().subscribe(res => {
-    //   this.loggedIn = res;
-    // });
+   this.loggedIn = this.authService.isLoggedIn();
     this.message = '';
   }
 
