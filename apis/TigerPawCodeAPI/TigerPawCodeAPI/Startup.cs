@@ -96,7 +96,6 @@ namespace TigerPawCodeAPI
             services.Configure<AppSettings>(appSettingsSection);
 
             // services
-            services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBlogService, BlogService>();
             services.AddScoped<IErrorHandler, ErrorHandler>();
             services.AddScoped<IUserService, UserService>();

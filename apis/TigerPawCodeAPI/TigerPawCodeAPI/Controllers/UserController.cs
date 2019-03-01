@@ -67,7 +67,7 @@ namespace TigerPawCodeAPI.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Token = tokenString,
-                Expiry = DateTime.Now.AddMinutes(1)
+                Expiry = DateTime.Now.AddHours(4)
             });
         }
 
