@@ -7,6 +7,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import { NotificationService } from '@core/services/notification.service';
 import { Location } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-blog-item',
@@ -92,14 +93,17 @@ export class BlogItemComponent implements OnInit {
   }
 
   onSubmit() {
-    // date deleted
-    if (this.blogItem.dateDeleted && this.deleted === false) {
-      this.blogForm.controls['dateDeleted'].setValue(null);
-    }
-
     // triage form - either create or update
     if (!this.blogItem) {
-      const blogItem = Object.assign({}, this.blogForm.value);
+
+    const blogItem = Object.assign({}, this.blogForm.value);
+      // date deleted
+      if (blogItem.dateDeleted && this.deleted === false) {
+        this.blogForm.controls['dateDeleted'].setValue(null);
+      } else if (!blogItem.dateDeleted && this.deleted) {
+        this.blogForm.controls['dateDeleted'].setValue(new Date());
+      }
+
       this.blogService.createBlog(blogItem).subscribe(res => {
         this.blogItem = res;
       }, error => {
