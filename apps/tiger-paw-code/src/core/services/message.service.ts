@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { MessageItem } from '@core/models/message-item';
 import { map, tap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class MessageService {
 
   count: Subject<number> = new Subject<number>();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
     this.setMessageUnreadCount();
    }
 

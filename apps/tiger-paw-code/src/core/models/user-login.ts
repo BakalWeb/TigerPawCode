@@ -5,5 +5,6 @@ export class UserLogin {
   firstName: string;
   lastName: string;
   expiry: Date;
+  token: string;
   // rememberMe: boolean;
 }

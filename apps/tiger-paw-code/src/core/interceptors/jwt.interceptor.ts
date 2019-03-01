@@ -1,43 +1,23 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
-import { LogService } from '@core/services/log.service';
-import { UserLogin } from '@core/models/user-login';
+
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(
-    private authService: AuthService,
-    private logService: LogService
-  ) {}
+    constructor(private authService: AuthService) { }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    try {
-      // check the user has a jwt
-      const jwt = this.authService.loggedInJwt();
-      if (jwt) {
-        // now check if it is expired or not
-        const userLogin = <UserLogin>(JSON.parse(jwt));
-        if (userLogin.expiry > new Date()) {
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${jwt}`
-          }
-        });
-      }
-      }
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const userLogin = this.authService.getUserLogin();
 
-      return next.handle(request);
-    } catch (error) {
-      this.logService.handleError(error);
+    if (userLogin) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${userLogin.token}`
+        }
+      });
     }
+
+    return next.handle(request);
   }
 }

@@ -50,7 +50,7 @@ namespace TigerPawCodeAPI.Controllers
                     issuer: "https://localhost:5001",
                     audience: "https://localhost:5001",
                     claims: new List<Claim>(),
-                    expires: DateTime.Now.AddMinutes(1),
+                    expires: DateTime.Now.AddHours(12),
                     signingCredentials: signInCredentials
                 );
 

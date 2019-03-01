@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
-import { UserService } from '@core/services/user.service';
 import { UserLogin } from '@core/models/user-login';
 
 @Component({
@@ -17,10 +15,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private notification: NotificationService,
     private router: Router,
-    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -29,17 +25,17 @@ export class RegisterComponent implements OnInit {
   }
 
   onChanges(): void {
-    this.registerForm.valueChanges.pipe(debounceTime(700)).subscribe(val => {
-      this.userService.validUsername(val.username).subscribe(res => {
-        if (!res) {
-          this.registerForm.controls['username'].setErrors({
-            InvalidUsername: true
-          });
-        } else {
-          this.registerForm.controls['username'].setErrors(null);
-        }
-      });
-    });
+    // this.registerForm.valueChanges.pipe(debounceTime(700)).subscribe(val => {
+    //   this.userService.validUsername(val.username).subscribe(res => {
+    //     if (!res) {
+    //       this.registerForm.controls['username'].setErrors({
+    //         InvalidUsername: true
+    //       });
+    //     } else {
+    //       this.registerForm.controls['username'].setErrors(null);
+    //     }
+    //   });
+    // });
   }
 
   initializeForm(): void {
@@ -61,23 +57,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.authService.logout();
-    const userLogin: UserLogin = Object.assign({}, this.registerForm.value);
-    this.userService.register(userLogin).subscribe(
-      res => {
-        if (!res) {
-          this.notification.generateSnackbarNotification(
-            'Registration form invalid.'
-          );
-          return;
-        }
-        this.authService.login(userLogin).subscribe(x => {
-          this.router.navigate(['home']);
-        });
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    // this.authService.logout();
+    // const userLogin: UserLogin = Object.assign({}, this.registerForm.value);
+    // this.userService.register(userLogin).subscribe(
+    //   res => {
+    //     if (!res) {
+    //       this.notification.generateSnackbarNotification(
+    //         'Registration form invalid.'
+    //       );
+    //       return;
+    //     }
+    //     this.authService.login(userLogin).subscribe(x => {
+    //       this.router.navigate(['home']);
+    //     });
+    //   },
+    //   error => {
+    //     console.error(error);
+    //   }
+    // );
   }
 }

@@ -43,7 +43,7 @@ namespace TigerPawCodeAPI.Controllers
             var user = _userService.Authenticate(userDto);
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                return new UnauthorizedResult();
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
