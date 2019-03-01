@@ -1,23 +1,20 @@
 import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BlogItem, BlogItemStatus } from '@core/models/blog-item';
+import { BlogItem, BlogItemStatus, BlogItemForm } from '@core/models/blog-item';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlogService } from '@core/services/blog.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import { NotificationService } from '@core/services/notification.service';
 import { Location } from '@angular/common';
-import * as moment from 'moment';
-
 @Component({
   selector: 'app-blog-item',
   templateUrl: './blog-item.component.html',
   styleUrls: ['./blog-item.component.scss']
 })
 export class BlogItemComponent implements OnInit {
-  blogItem: BlogItem;
+  blogItemForm: BlogItemForm;
   blogForm: FormGroup;
-  deleted: Boolean;
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
@@ -28,7 +25,6 @@ export class BlogItemComponent implements OnInit {
     private ngZone: NgZone,
     private notificationService: NotificationService,
     private location: Location,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -41,7 +37,7 @@ export class BlogItemComponent implements OnInit {
     if (blogItemId > 0) {
       this.blogService.getBlog(blogItemId).subscribe(
         res => {
-          this.blogItem = res;
+          this.blogItemForm = res;
         },
         error => {
           console.error(error);
@@ -64,28 +60,26 @@ export class BlogItemComponent implements OnInit {
 
   initializeBlogItemForm(): void {
     this.blogForm = this.formBuilder.group({
-      headline: [this.blogItem ? this.blogItem.headline : ''],
-      shortDescription: [this.blogItem ? this.blogItem.shortDescription : ''],
-      dateCreated: [this.blogItem ? this.blogItem.dateCreated : new Date()],
-      status: [this.blogItem ? this.blogItem.status : BlogItemStatus.draft],
-      promoted: [this.blogItem ? this.blogItem.promoted : false],
-      content: [this.blogItem ? this.blogItem.content : ''],
-      thumbnail: [this.blogItem ? this.blogItem.thumbnail : ''],
-      author: [this.blogItem ? this.blogItem.author : 'Adam Bakal'],
+      headline: [this.blogItemForm ? this.blogItemForm.headline : ''],
+      shortDescription: [this.blogItemForm ? this.blogItemForm.shortDescription : ''],
+      dateCreated: [this.blogItemForm ? this.blogItemForm.dateCreated : new Date()],
+      status: [this.blogItemForm ? this.blogItemForm.status : BlogItemStatus.draft],
+      promoted: [this.blogItemForm ? this.blogItemForm.promoted : false],
+      content: [this.blogItemForm ? this.blogItemForm.content : ''],
+      thumbnail: [this.blogItemForm ? this.blogItemForm.thumbnail : ''],
+      author: [this.blogItemForm ? this.blogItemForm.author : 'Adam Bakal'],
       dateLive: [
-        this.blogItem && this.blogItem.dateLive
-          ? this.blogItem.dateLive
+        this.blogItemForm && this.blogItemForm.dateLive
+          ? this.blogItemForm.dateLive
           : null
       ],
-      dateDeleted: [
-        this.blogItem && this.blogItem.dateDeleted
-          ? this.blogItem.dateDeleted
-          : null
+      toggleDelete: [
+        this.blogItemForm && this.blogItemForm.dateDeleted
+          ? true
+          : false
       ],
-      id: [this.blogItem ? this.blogItem.id : 0]
+      id: [this.blogItemForm ? this.blogItemForm.id : 0]
     });
-
-    this.deleted = (this.blogItem && this.blogItem.dateDeleted) ? true : false;
    }
 
   onActiveChange(active: boolean): void {
@@ -94,34 +88,31 @@ export class BlogItemComponent implements OnInit {
 
   onSubmit() {
     // triage form - either create or update
-    if (!this.blogItem) {
+    if (!this.blogItemForm) {
 
     const blogItem = Object.assign({}, this.blogForm.value);
       // date deleted
-      if (blogItem.dateDeleted && this.deleted === false) {
-        this.blogForm.controls['dateDeleted'].setValue(null);
-      } else if (!blogItem.dateDeleted && this.deleted) {
-        this.blogForm.controls['dateDeleted'].setValue(new Date());
-      }
+      blogItem.dateDeleted = (this.blogForm.controls['toggleDelete'].value) ? new Date() : null;
 
       this.blogService.createBlog(blogItem).subscribe(res => {
-        this.blogItem = res;
+        this.blogItemForm = res;
       }, error => {
         console.error(error);
       }, () => {
-        if (this.blogItem) {
+        if (this.blogItemForm) {
           this.notificationService.generateSnackbarNotification(`Blog item created`);
           this.location.back();
         }
       });
     } else {
-      this.blogItem = Object.assign({}, this.blogForm.value);
-      this.blogService.updateBlog(this.blogItem).subscribe(res => {
-        this.blogItem = res;
+      this.blogItemForm = Object.assign({}, this.blogForm.value);
+      this.blogItemForm.dateDeleted = (!this.blogItemForm.dateDeleted && this.blogForm.controls['toggleDelete'].value)  ? new Date() : null;
+      this.blogService.updateBlog(this.blogItemForm).subscribe(res => {
+        this.blogItemForm = res;
       }, error => {
         console.error(error);
       }, () => {
-        if (this.blogItem) {
+        if (this.blogItemForm) {
           this.notificationService.generateSnackbarNotification(`Blog item updated`);
           this.location.back();
         }
