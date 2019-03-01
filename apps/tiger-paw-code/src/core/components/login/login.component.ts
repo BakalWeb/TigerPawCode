@@ -27,11 +27,11 @@ export class LoginHeaderComponent implements OnInit, AfterViewInit {
   constructor(
     private authService: AuthService
   ) {
-   this.loggedIn = this.authService.isLoggedIn();
     this.message = '';
   }
 
   ngOnInit(): void {
+    this.loggedIn = this.authService.isLoggedIn();
     // this.authService.isLoginSubject.subscribe(value => {
     //   console.log('login component', value);
     //   this.loggedIn = value;
@@ -44,5 +44,6 @@ export class LoginHeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
+    this.authService.logout();
   }
 }

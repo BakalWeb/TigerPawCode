@@ -54,15 +54,25 @@ export class AuthService {
 
     // checks if token is expired
     result = this.isTokenExpired();
+    if (result) {
+      console.log('expired token');
+      this.logout();
+      this.loginSubject.next(null);
+      return this.loginSubject.asObservable();
+    }
+
+    // if we have got here then the user is logged in with a valid session
+    result = true;
 
     // returns subject as an observable
     this.loginSubject.next(result);
+    console.log('user is logged in', result);
     return this.loginSubject.asObservable();
   }
 
   public logout() {
-    this.loginSubject.next(false);
     localStorage.removeItem(this.JWT_TOKEN_NAME);
+    this.loginSubject.next(null);
   }
 
   public login(user: UserLogin): Observable<UserLogin> {
