@@ -9,10 +9,12 @@ namespace TigerPawCodeAPI.Services.Implementations
     public class UserProfileService : IUserProfileService
     {
         private readonly DataContext _context;
+        private IErrorHandler _errorHandler;
 
-        public UserProfileService(DataContext context)
+        public UserProfileService(DataContext context, IErrorHandler errorHandler)
         {
             _context = context ?? throw new NotImplementedException(nameof(context));
+            _errorHandler = errorHandler ?? throw new NotImplementedException(nameof(errorHandler));
         }
 
         public UserProfile GetByUserId(int id)
@@ -21,10 +23,10 @@ namespace TigerPawCodeAPI.Services.Implementations
             {
                 return _context.UserProfiles.FirstOrDefault(x => x.UserId == id);
             }
-            catch (Exception)
+            catch (AppException ex)
             {
-
-                throw;
+                _errorHandler.CaptureAsync(ex);
+                throw ex;
             }
         }
 
@@ -49,8 +51,8 @@ namespace TigerPawCodeAPI.Services.Implementations
             }
             catch (AppException ex)
             {
-
-                throw;
+                _errorHandler.CaptureAsync(ex);
+                throw ex;
             }
         }
     }
