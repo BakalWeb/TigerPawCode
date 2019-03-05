@@ -1,4 +1,4 @@
-export class BlogItem {
+abstract class BlogItemBase {
   id: number;
   headline: string;
   shortDescription: string;
@@ -10,8 +10,15 @@ export class BlogItem {
   thumbnail: string;
   author: string;
   dateLive?: Date;
-  dateDeleted?: Date;
   tags?: string[];
+  dateDeleted?: Date;
+}
+
+export class BlogItem extends BlogItemBase {
+}
+
+export class BlogItemForm extends BlogItemBase {
+  toggleDelete?: boolean;
 }
 
 export enum BlogItemStatus {

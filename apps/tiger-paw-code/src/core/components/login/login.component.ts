@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UserLogin } from '@core/models/user-login';
 import { AuthService } from '@core/services/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
+import { UserContract } from '@core/models/contracts/user-login.contract';
 
 @Component({
   selector: 'app-login-header',
@@ -21,17 +21,17 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class LoginHeaderComponent implements OnInit, AfterViewInit {
   message: string;
-  user: UserLogin;
+  user: UserContract;
   loggedIn: Observable<boolean>;
 
   constructor(
     private authService: AuthService
   ) {
-   this.loggedIn = this.authService.isLoggedIn();
     this.message = '';
   }
 
   ngOnInit(): void {
+    this.loggedIn = this.authService.isLoggedIn();
     // this.authService.isLoginSubject.subscribe(value => {
     //   console.log('login component', value);
     //   this.loggedIn = value;
@@ -44,5 +44,6 @@ export class LoginHeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout(): void {
+    this.authService.logout();
   }
 }

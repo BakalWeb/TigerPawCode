@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   inMemoryApiUrl: 'http://localhost:4200/api',
   apiUrl: 'https://localhost:5001/api',
-  inMemory: false
+  inMemory: false,
+  jwtTokenName: 'tigerpawcode-jwt',
 };
 
 /*

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Sentry;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Linq;
 using System.Text;
@@ -96,10 +95,11 @@ namespace TigerPawCodeAPI
             services.Configure<AppSettings>(appSettingsSection);
 
             // services
-            services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IBlogService, BlogService>();
             services.AddScoped<IErrorHandler, ErrorHandler>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             // swagger
             services.AddSwaggerGen(c =>
@@ -121,7 +121,7 @@ namespace TigerPawCodeAPI
             {
                 app.UseHsts();
             }
-
+            
             // logging
             app.UseMiddleware<SentryMiddleware>();
 

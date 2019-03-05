@@ -6,10 +6,10 @@ C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.csproj.CoreCompileInputs.cache
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.RazorAssemblyInfo.cache
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.RazorAssemblyInfo.cs
+C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.AssemblyInfoInputs.cache
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.AssemblyInfo.cs
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.RazorTargetAssemblyInfo.cache
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.dll
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.pdb
 C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\TigerPawCodeAPI.csprojAssemblyReference.cache
-C:\Users\adamb\source\repos\tiger-paw-code\apis\TigerPawCodeAPI\TigerPawCodeAPI\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

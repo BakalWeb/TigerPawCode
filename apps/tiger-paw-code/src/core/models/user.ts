@@ -1,15 +1,20 @@
-export class User {
+import { UserRole } from './enums/user-role.enum';
+
+export abstract class UserBase {
   id: number;
-  username: string;
-  role: UserRole;
-  lastLoggedIn: Date;
-  created: Date;
   firstName: string;
   lastName: string;
-  password: string;
+  username: string;
+  email: string;
+  subscribed: boolean;
+  dateCreated: Date;
+  lastModified: Date;
 }
 
-export enum UserRole {
-  admin,
-  user,
+export class User extends UserBase {
+  fullName: string;
+  password: string;
+  role: UserRole;
+  userDeleted: boolean;
 }
+

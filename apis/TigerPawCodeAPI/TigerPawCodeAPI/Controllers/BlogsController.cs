@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Sentry;
 using TigerPawCodeAPI.Models;
 using TigerPawCodeAPI.Services.Interfaces;
 
