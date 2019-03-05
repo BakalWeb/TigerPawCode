@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TigerPawCodeAPI.Infrastructure.Configurations;
 using TigerPawCodeAPI.Infrastructure.Helpers;
-using TigerPawCodeAPI.Models.Dtos;
+using TigerPawCodeAPI.Models.Contracts;
 using TigerPawCodeAPI.Services.Interfaces;
 
 namespace TigerPawCodeAPI.Controllers

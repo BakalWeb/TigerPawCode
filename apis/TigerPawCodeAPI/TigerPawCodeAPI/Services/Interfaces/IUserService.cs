@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using TigerPawCodeAPI.Models;
-using TigerPawCodeAPI.Models.Dtos;
+using TigerPawCodeAPI.Models.Contracts;
 
 namespace TigerPawCodeAPI.Services.Interfaces
 {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TigerPawCodeAPI.Infrastructure.Helpers;
 using TigerPawCodeAPI.Models;
-using TigerPawCodeAPI.Models.Dtos;
+using TigerPawCodeAPI.Models.Contracts;
 using TigerPawCodeAPI.Services.Interfaces;
 
 namespace TigerPawCodeAPI.Controllers

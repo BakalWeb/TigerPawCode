@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using TigerPawCodeAPI.Infrastructure.Helpers;
 using TigerPawCodeAPI.Models;
-using TigerPawCodeAPI.Models.Dtos;
+using TigerPawCodeAPI.Models.Contracts;
 using TigerPawCodeAPI.Services.Interfaces;
 using TigerPawCodeAPI.Utilities;
 
