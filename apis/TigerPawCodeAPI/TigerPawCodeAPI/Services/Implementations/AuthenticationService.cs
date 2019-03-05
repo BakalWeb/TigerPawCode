@@ -11,7 +11,7 @@ namespace TigerPawCodeAPI.Services.Implementations
     public class AuthenticationService : IAuthenticationService
     {
         private readonly DataContext _context;
-        private IErrorHandler _errorHandler;
+        private readonly IErrorHandler _errorHandler;
 
         public AuthenticationService(DataContext context, IErrorHandler errorHandler)
         {

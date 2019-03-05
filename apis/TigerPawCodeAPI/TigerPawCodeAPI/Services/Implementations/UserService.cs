@@ -13,7 +13,7 @@ namespace TigerPawCodeAPI.Services.Implementations
     public class UserService : IUserService
     {
         private readonly DataContext _context;
-        private IErrorHandler _errorHandler;
+        private readonly IErrorHandler _errorHandler;
 
         public UserService(DataContext context, IErrorHandler errorHandler)
         {
@@ -58,8 +58,7 @@ namespace TigerPawCodeAPI.Services.Implementations
                 if (_context.Users.Any(x => x.Username == user.Username))
                     throw new AppException($"Username {user.Username} is already taken");
 
-                byte[] passwordHash, passwordSalt;
-                PasswordUtility.CreatePasswordHash(user.Password, out passwordHash, out passwordSalt);
+                PasswordUtility.CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
@@ -114,8 +113,7 @@ namespace TigerPawCodeAPI.Services.Implementations
                 // update password if it was entered
                 if (!string.IsNullOrWhiteSpace(model.Password))
                 {
-                    byte[] passwordHash, passwordSalt;
-                    PasswordUtility.CreatePasswordHash(model.Password, out passwordHash, out passwordSalt);
+                    PasswordUtility.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                     user.PasswordHash = passwordHash;
                     user.PasswordSalt = passwordSalt;
@@ -213,8 +211,7 @@ namespace TigerPawCodeAPI.Services.Implementations
                 // update password if it was entered
                 if (!string.IsNullOrWhiteSpace(model.Password))
                 {
-                    byte[] passwordHash, passwordSalt;
-                    PasswordUtility.CreatePasswordHash(model.Password, out passwordHash, out passwordSalt);
+                    PasswordUtility.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
                     user.PasswordHash = passwordHash;
                     user.PasswordSalt = passwordSalt;

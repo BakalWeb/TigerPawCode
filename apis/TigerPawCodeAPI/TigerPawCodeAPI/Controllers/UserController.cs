@@ -16,8 +16,8 @@ namespace TigerPawCodeAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private IMapper _mapper;
-        private IErrorHandler _errorHandler;
+        private readonly IMapper _mapper;
+        private readonly IErrorHandler _errorHandler;
         
         public UserController(IUserService userService, IMapper mapper, IErrorHandler errorHandler)
         {
@@ -77,7 +77,7 @@ namespace TigerPawCodeAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]User user)
+        public IActionResult Update([FromBody]User user)
         {
             //// map dto to entity and set id
             //var user = _mapper.Map<User>(userContract);

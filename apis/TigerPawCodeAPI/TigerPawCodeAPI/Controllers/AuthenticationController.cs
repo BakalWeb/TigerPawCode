@@ -19,7 +19,7 @@ namespace TigerPawCodeAPI.Controllers
     public class AuthenticationController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
-        private IErrorHandler _errorHandler;
+        private readonly IErrorHandler _errorHandler;
         private readonly AppSettings _appSettings;
 
         public AuthenticationController(IAuthenticationService authenticationService, IOptions<AppSettings> appSettings, IErrorHandler errorHandler)
@@ -57,10 +57,10 @@ namespace TigerPawCodeAPI.Controllers
                 // return basic user info (without password) and token to store client side
                 return Ok(new
                 {
-                    Id = user.Id,
-                    Username = user.Username,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
+                    user.Id,
+                    user.Username,
+                    user.FirstName,
+                    user.LastName,
                     Token = tokenString,
                     Expiry = DateTime.Now.AddHours(4)
                 });
