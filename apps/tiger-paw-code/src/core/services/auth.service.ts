@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { UserLogin } from '@core/models/user-login';
 import { environment } from '@env/environment';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { UserContract } from '@core/models/contracts/user-login.contract';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl: string;
-  public JWT_TOKEN_NAME = 'tigerpawcode-jwt';
+  public jwtTokenName = environment.jwtTokenName;
   public loginSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
@@ -21,14 +21,14 @@ export class AuthService {
   }
 
   // returns user login from jwt
-  public getUserLogin(): UserLogin {
-    const token = localStorage.getItem(this.JWT_TOKEN_NAME);
-    return <UserLogin>JSON.parse(token);
+  public getUserLogin(): UserContract {
+    const token = localStorage.getItem(this.jwtTokenName);
+    return <UserContract>JSON.parse(token);
   }
 
   // determines if session has a token
   public hasToken(): boolean {
-    return (localStorage.getItem(this.JWT_TOKEN_NAME)) ? true : false;
+    return (localStorage.getItem(this.jwtTokenName)) ? true : false;
   }
 
   // returns date of jwt expiration
@@ -71,22 +71,22 @@ export class AuthService {
   }
 
   public logout() {
-    localStorage.removeItem(this.JWT_TOKEN_NAME);
+    localStorage.removeItem(this.jwtTokenName);
     this.loginSubject.next(null);
   }
 
-  public login(user: UserLogin): Observable<UserLogin> {
+  public login(user: UserContract): Observable<UserContract> {
     // first logout
     this.logout();
 
     // call api for auth result
-    return this.http.post<UserLogin>(`${this.apiUrl}/user/authenticate`, user)
+    return this.http.post<UserContract>(`${this.apiUrl}/authentication`, user)
       .pipe(
         map(
           userLogin => {
             if (userLogin) {
               this.loginSubject.next(true);
-              localStorage.setItem(this.JWT_TOKEN_NAME, JSON.stringify(userLogin));
+              localStorage.setItem(this.jwtTokenName, JSON.stringify(userLogin));
             }
             return userLogin;
           }

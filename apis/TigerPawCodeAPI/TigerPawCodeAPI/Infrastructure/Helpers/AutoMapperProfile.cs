@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TigerPawCodeAPI.Models;
 using TigerPawCodeAPI.Models.Dtos;
 
@@ -12,8 +8,8 @@ namespace TigerPawCodeAPI.Infrastructure.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
+            CreateMap<User, UserContract>();
+            CreateMap<UserContract, User>();
         }
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UserLogin } from '@core/models/user-login';
 import { AuthService } from '@core/services/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
+import { UserContract } from '@core/models/contracts/user-login.contract';
 
 @Component({
   selector: 'app-login-header',
@@ -21,7 +21,7 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class LoginHeaderComponent implements OnInit, AfterViewInit {
   message: string;
-  user: UserLogin;
+  user: UserContract;
   loggedIn: Observable<boolean>;
 
   constructor(

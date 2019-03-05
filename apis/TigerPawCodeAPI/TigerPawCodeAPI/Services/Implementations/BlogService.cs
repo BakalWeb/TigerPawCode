@@ -15,7 +15,7 @@ namespace TigerPawCodeAPI.Services.Implementations
 
         public BlogService(DataContext context)
         {
-            _context = context;
+            _context = context ?? throw new NotImplementedException(nameof(context));
         }
 
         public async Task<IEnumerable<Blog>> GetAllBlogs()

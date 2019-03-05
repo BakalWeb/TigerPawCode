@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from '@core/services/notification.service';
 import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs/operators';
-import { UserLogin } from '@core/models/user-login';
+import { AuthService } from '@core/services/auth.service';
+import { UserService } from '@core/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +15,10 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private notification: NotificationService,
+    private notificationService: NotificationService,
     private router: Router,
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -57,23 +59,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    // this.authService.logout();
-    // const userLogin: UserLogin = Object.assign({}, this.registerForm.value);
-    // this.userService.register(userLogin).subscribe(
-    //   res => {
-    //     if (!res) {
-    //       this.notification.generateSnackbarNotification(
-    //         'Registration form invalid.'
-    //       );
-    //       return;
-    //     }
-    //     this.authService.login(userLogin).subscribe(x => {
-    //       this.router.navigate(['home']);
-    //     });
-    //   },
-    //   error => {
-    //     console.error(error);
-    //   }
-    // );
+    this.authService.logout();
+    const userLogin = Object.assign({}, this.registerForm.value);
+    this.userService.register(userLogin).subscribe(
+      res => {
+        if (!res) {
+          this.notificationService.generateSnackbarNotification(
+            'Registration form invalid.'
+          );
+          return;
+        }
+        this.authService.login(userLogin).subscribe(x => {
+          this.router.navigate(['home']);
+        });
+      },
+      error => {
+        this.notificationService.generateSnackbarNotification(error.error.message);
+      }
+    );
   }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TigerPawCodeAPI.Infrastructure.Configurations
+﻿namespace TigerPawCodeAPI.Infrastructure.Configurations
 {
     public class IdentityConfiguration
     {

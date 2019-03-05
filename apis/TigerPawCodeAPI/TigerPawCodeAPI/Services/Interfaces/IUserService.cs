@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TigerPawCodeAPI.Models;
 using TigerPawCodeAPI.Models.Dtos;
 
@@ -9,8 +6,6 @@ namespace TigerPawCodeAPI.Services.Interfaces
 {
     public interface IUserService
     {
-        User Authenticate(UserDto userDto);
-
         User GetById(int id);
 
         User Create(User user);
@@ -18,6 +13,8 @@ namespace TigerPawCodeAPI.Services.Interfaces
         IEnumerable<User> GetAll();
 
         User Update(User user);
+
+        UserContract Update(UserContract userContract);
 
         bool Delete(int id);
 
