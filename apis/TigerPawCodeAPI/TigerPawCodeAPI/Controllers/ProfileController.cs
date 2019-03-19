@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using TigerPawCodeAPI.Infrastructure.Helpers;
 using TigerPawCodeAPI.Models.Contracts;
 using TigerPawCodeAPI.Services.Interfaces;
@@ -16,7 +20,7 @@ namespace TigerPawCodeAPI.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUserProfileService _userProfileService;
-        private IErrorHandler _errorHandler;
+        private readonly IErrorHandler _errorHandler;
 
         public ProfileController(IUserService userService, IUserProfileService userProfileService, IErrorHandler errorHandler)
         {
@@ -47,6 +51,41 @@ namespace TigerPawCodeAPI.Controllers
             {
                 _errorHandler.CaptureAsync(ex);
                 return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("avatar")]
+        public string AvatarUpload()
+        {
+            try
+            {
+                // check file exists in the posted request
+                var file = Request.Form.Files[0];
+                if (file.Length <= 0)
+                    throw new Exception();
+
+                // pass file to memory stream to convert to byte array
+                byte[] bytes;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    bytes = ms.ToArray();
+                }
+
+                // throw exception on failure to convert file to bytes
+                if (bytes.Length <= 0)
+                    throw new Exception("Unable to read bytes of file");
+
+                // save byte array to database
+                _userProfileService.Avatar(bytes);
+
+                // convert byte array into a base64 json string for front end to render as an image
+                return JsonConvert.SerializeObject(Convert.ToBase64String(bytes)); ;
+            }
+            catch (Exception ex)
+            {
+                return $"JsonConvert.SerializeObject(Error of some kind: {ex.Message})";
+
             }
         }
     }

@@ -6,7 +6,7 @@ import { environment } from '@env/environment';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
 import { LogService } from './log.service';
-import { UserContract } from '@core/models/contracts/user-login.contract';
+import { UserContract } from '@core/models/contracts/user.contract';
 
 @Injectable({
   providedIn: 'root'

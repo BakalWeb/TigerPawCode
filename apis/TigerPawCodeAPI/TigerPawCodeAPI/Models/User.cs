@@ -19,11 +19,12 @@ namespace TigerPawCodeAPI.Models
         public DateTime DateCreated { get; set; }
 
         public DateTime LastModified { get; set; }
+
+        public string FullName => $"{this.FirstName} {this.LastName}";
     }
 
     public class User : UserBase
     {
-        public string FullName => $"{this.FirstName} {this.LastName}";
 
         public string Password { get; set; }
         public byte[] PasswordHash { get; set; }

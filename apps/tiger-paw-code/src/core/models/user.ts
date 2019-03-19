@@ -9,10 +9,10 @@ export abstract class UserBase {
   subscribed: boolean;
   dateCreated: Date;
   lastModified: Date;
+  fullName: string;
 }
 
 export class User extends UserBase {
-  fullName: string;
   password: string;
   role: UserRole;
   userDeleted: boolean;

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './containers/profile/profile.component';
 import { RouterModule, Route } from '@angular/router';
 import { MaterialModule } from '@core/modules/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonComponentsModule } from '@core/components/common-components.module';
 
 const routes: Route[] = [
   {
@@ -15,11 +17,12 @@ const routes: Route[] = [
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    CommonComponentsModule
   ],
   declarations: [ProfileComponent],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule]
 })
-export class ProfileModule { }
+export class ProfileModule {}

@@ -131,6 +131,56 @@ namespace TigerPawCodeAPI.Services.Implementations
             }
         }
 
+        /// <summary>
+        /// Called from the profile controller
+        /// </summary>
+        /// <param name="model">UserContract model</param>
+        /// <returns>The updated model value</returns>
+        public UserContract Update(UserContract model)
+        {
+            try
+            {
+                var user = _context.Users.Find(model.Id);
+
+                if (user == null)
+                    throw new AppException("User not found");
+
+                if (model.Username != user.Username)
+                {
+                    // username has changed so check if the new username is already taken
+                    if (_context.Users.Any(x => x.Username == model.Username))
+                        throw new AppException("Username " + model.Username + " is already taken");
+                }
+
+                // todo change this to use automapper
+                // update user properties
+                user.LastModified = DateTime.Now;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Username = model.Username;
+                user.Subscribed = model.Subscribed;
+
+                // update password if it was entered
+                if (!string.IsNullOrWhiteSpace(model.Password))
+                {
+                    PasswordUtility.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+                    user.PasswordHash = passwordHash;
+                    user.PasswordSalt = passwordSalt;
+                }
+
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+                return model;
+            }
+            catch (AppException ex)
+            {
+                _errorHandler.CaptureAsync(ex);
+                throw ex;
+            }
+        }
+
         public bool Delete(int id)
         {
             try
@@ -185,48 +235,5 @@ namespace TigerPawCodeAPI.Services.Implementations
             }
         }
 
-        public UserContract Update(UserContract model)
-        {
-            try
-            {
-                var user = _context.Users.Find(model.Id);
-
-                if (user == null)
-                    throw new AppException("User not found");
-
-                if (model.Username != user.Username)
-                {
-                    // username has changed so check if the new username is already taken
-                    if (_context.Users.Any(x => x.Username == model.Username))
-                        throw new AppException("Username " + model.Username + " is already taken");
-                }
-
-                // todo change this to use automapper
-                // update user properties
-                user.LastModified = DateTime.Now;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.Username = model.Username;
-
-                // update password if it was entered
-                if (!string.IsNullOrWhiteSpace(model.Password))
-                {
-                    PasswordUtility.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-                    user.PasswordHash = passwordHash;
-                    user.PasswordSalt = passwordSalt;
-                }
-
-                _context.Users.Update(user);
-                _context.SaveChanges();
-
-                return model;
-            }
-            catch (AppException ex)
-            {
-                _errorHandler.CaptureAsync(ex);
-                throw ex;
-            }
-        }
     }
 }

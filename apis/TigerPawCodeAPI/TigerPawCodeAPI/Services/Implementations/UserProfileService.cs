@@ -17,6 +17,21 @@ namespace TigerPawCodeAPI.Services.Implementations
             _errorHandler = errorHandler ?? throw new NotImplementedException(nameof(errorHandler));
         }
 
+        public void Avatar(byte[] file)
+        {
+            try
+            {
+                var result = _context.UserProfiles.FirstOrDefault(x => x.UserId == 3);
+                result.Avatar = file;
+                _context.UserProfiles.Update(result);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public UserProfile GetByUserId(int id)
         {
             try
