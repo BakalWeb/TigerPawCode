@@ -7,5 +7,7 @@ namespace TigerPawCodeAPI.Services.Interfaces
         UserProfile GetByUserId(int id);
 
         UserProfile Update(UserProfile model);
+
+        void Avatar(byte[] file);
     }
 }

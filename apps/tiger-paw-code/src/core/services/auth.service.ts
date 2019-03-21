@@ -4,7 +4,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { environment } from '@env/environment';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { UserContract } from '@core/models/contracts/user-login.contract';
+import { UserContract } from '@core/models/contracts/user.contract';
 
 @Injectable({
   providedIn: 'root'

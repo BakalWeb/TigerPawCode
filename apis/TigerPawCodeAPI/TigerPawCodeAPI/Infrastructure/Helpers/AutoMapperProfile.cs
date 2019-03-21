@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TigerPawCodeAPI.Models;
-using TigerPawCodeAPI.Models.Dtos;
+using TigerPawCodeAPI.Models.Contracts;
 
 namespace TigerPawCodeAPI.Infrastructure.Helpers
 {
@@ -10,6 +10,7 @@ namespace TigerPawCodeAPI.Infrastructure.Helpers
         {
             CreateMap<User, UserContract>();
             CreateMap<UserContract, User>();
+            
         }
     }
 }

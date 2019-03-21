@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { UserContract } from '@core/models/contracts/user-login.contract';
+import { UserContract } from '@core/models/contracts/user.contract';
 
 @Component({
   selector: 'app-login-header',

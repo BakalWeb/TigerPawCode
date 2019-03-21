@@ -7,5 +7,7 @@
         public int UserId { get; set; }
 
         public string AboutMe { get; set; }
+
+        public byte[] Avatar { get; set; }
     }
 }

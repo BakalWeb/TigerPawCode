@@ -1,6 +1,10 @@
 
       <app-banner [banner]="banner" *ngIf='banner'></app-banner>
 <div class="container blogs" appReadingProgress>
+
+  <div class="row">
+<div class="col-sm-8">
+
   <mat-card *ngIf='blog'>
     <mat-card-content>
       <!-- <p class="">
@@ -31,4 +35,10 @@
       </div>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div class="col">
+  <app-profile-view [profile]='blogAuthor' *ngIf='blogAuthor'></app-profile-view>
+</div>
+</div>
 </div>

@@ -1,0 +1,21 @@
+<div *ngIf="profile && profile.userContract && profile.userProfile">
+  <p class="text-center"> <img id="image" [src]="'data:image/jpeg;base64,'+ this.profile.userProfile.avatar" class="rounded-circle profile-image"
+      *ngIf='this.profile && this.profile.userProfile' />
+  </p>
+  <div class="profile-container">
+    <div class="name-container">
+      <p class="name text-center">{{ this.profile.userContract.firstName + ' ' + this.profile.userContract.lastName
+        }}</p>
+      <p class="small text-center">@{{this.profile.userContract.username }}</p>
+    </div>
+    <div class="profile-content">
+      <ul class="profile">
+        <li class="small"><b>Registered</b> {{ this.profile.userContract.dateCreated | date: 'yyyy-MM-dd'}}</li>
+        <hr />
+        <li>{{ this.profile.userContract.email }}</li>
+      </ul>
+      <h2>About Me</h2>
+      <p>{{ this.profile.userProfile.aboutMe }}</p>
+    </div>
+  </div>
+</div>

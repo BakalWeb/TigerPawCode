@@ -1,53 +1,75 @@
 <div class="container">
 
-  <mat-card>
-    <mat-card-title>Profile</mat-card-title>
-    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" *ngIf='profileForm'>
-      <fieldset formGroupName="userContract">
+  <div class="row">
+    <div class="col-sm-6">
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" *ngIf='profileForm'>
+        <mat-card>
+          <mat-card-title class="heading-overlap">Update your profile</mat-card-title>
+          <fieldset formGroupName="userContract">
 
-        <div class="row">
-        <div class="col-sm-6">
-          <mat-form-field class="max-width">
-            <input matInput placeholder="First name" formControlName='firstName' autocomplete="given-name" autofocus
-              tabindex="1">
-          </mat-form-field>
-        </div>
+            <div class="row" style="margin-bottom:15px;">
+              <div class="col-md-3">
+                <input type="file" #file placeholder="Choose file" (change)="fileChange(file.files)" style="display:none;">
+                <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+              </div>
+            </div>
 
-        <div class="col-sm-6">
-          <mat-form-field class="max-width">
-            <input matInput placeholder="Last name" formControlName='lastName' autocomplete="family-name" tabindex="2">
-          </mat-form-field>
-        </div>
-      </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field class="max-width">
+                  <input matInput placeholder="First name" formControlName='firstName' autocomplete="given-name"
+                    autofocus tabindex="1">
+                </mat-form-field>
+              </div>
 
-        <mat-form-field class="max-width">
-          <input matInput placeholder="Email" formControlName='email' autocomplete="email" tabindex="3">
-        </mat-form-field>
-        <mat-form-field class="max-width">
-          <input matInput placeholder="Username" formControlName='username' autocomplete="username" tabindex="4">
-        </mat-form-field>
-        <span *ngIf="profileForm.controls.userContract.username?.errors?.InvalidUsername">Username has already been
-          taken</span>
-      </fieldset>
+              <div class="col-sm-6">
+                <mat-form-field class="max-width">
+                  <input matInput placeholder="Last name" formControlName='lastName' autocomplete="family-name"
+                    tabindex="2">
+                </mat-form-field>
+              </div>
+            </div>
 
-      <fieldset formGroupName="userProfile">
-        <mat-form-field class="max-width">
-          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-            cdkAutosizeMaxRows="100" formControlName="aboutMe" placeholder="About me"></textarea>
-        </mat-form-field>
-      </fieldset>
+            <mat-form-field class="max-width">
+              <input matInput placeholder="Email" formControlName='email' autocomplete="email" tabindex="3">
+            </mat-form-field>
+            <mat-form-field class="max-width">
+              <input matInput placeholder="Username" formControlName='username' autocomplete="username" tabindex="4">
+            </mat-form-field>
+            <span *ngIf="profileForm.controls.userContract.username?.errors?.InvalidUsername">Username has already been
+              taken</span>
 
 
-      <mat-toolbar>
-          <div class="col-sm-6">
-            <button mat-raised-button color="primary" type="submit">Submit</button>
-          </div>
-          <div class="col-sm-6">
-              <button mat-raised-button type="submit" class="float-right">Cancel</button>
-          </div>
-      </mat-toolbar>
-    </form>
-  </mat-card>
+            <mat-slide-toggle matInput formControlName="subscribed">Subscribed to email notifications</mat-slide-toggle>
+
+          </fieldset>
+
+          <fieldset formGroupName="userProfile">
+            <mat-form-field class="max-width">
+              <textarea matInput placeholder="About me" formControlName="aboutMe"></textarea>
+            </mat-form-field>
+          </fieldset>
+
+
+          <mat-toolbar>
+            <div class="col-sm-6">
+              <button mat-raised-button color="primary" type="submit">Submit</button>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+          </mat-toolbar>
+
+        </mat-card>
+      </form>
+
+    </div>
+
+    <div class="col-sm-6" *ngIf="profile">
+      <app-profile-view [profile]="profile"></app-profile-view>
+    </div>
+
+  </div>
 
 
 

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MessageChipComponent } from './message-chip/message-chip.component';
 import { BannerComponent } from './banner/banner.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
 
 @NgModule({
   imports: [
@@ -17,13 +18,16 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
     LoginHeaderComponent,
     MessageChipComponent,
     BannerComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    ProfileViewComponent
   ],
+  // manually add each component to be consumed
   exports: [
     LoginHeaderComponent,
     MessageChipComponent,
     BannerComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    ProfileViewComponent
   ]
 })
 export class CommonComponentsModule { }

@@ -1,4 +1,4 @@
-﻿namespace TigerPawCodeAPI.Models.Dtos
+﻿namespace TigerPawCodeAPI.Models.Contracts
 {
     public class UserContract : UserBase
     {

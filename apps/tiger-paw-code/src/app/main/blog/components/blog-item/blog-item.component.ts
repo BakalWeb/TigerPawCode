@@ -6,6 +6,8 @@ import { BlogItem } from '@core/models/blog-item';
 import { of, forkJoin, pipe } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Banner } from '@core/interfaces/banner.interface';
+import { ProfileService } from '@core/services/profile.service';
+import { ProfileContract } from '@core/models/contracts/profile.contract';
 
 @Component({
   selector: 'app-blog-item',
@@ -18,11 +20,13 @@ export class BlogItemComponent implements OnInit {
   previousId: number;
   nextId: number;
   banner: Banner;
+  blogAuthor: ProfileContract;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private blogService: BlogService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit() {
@@ -49,6 +53,9 @@ export class BlogItemComponent implements OnInit {
         () => {
           if (this.blog) {
           // this.generateBlogNavigation();
+          this.profileService.getProfile(this.blog.userId).subscribe(res => {
+            this.blogAuthor = res;
+          });
           }
         }
       );

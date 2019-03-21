@@ -82,7 +82,7 @@ namespace TigerPawCodeAPI.Models
          Etiam hendrerit in est ut mattis.</p>
 ",
                     Thumbnail = "https = //www.fillmurray.com/g/140/100",
-                    Author = "Adam Bakal",
+                    //Author = "Adam Bakal",
                     DateLive = DateTime.Now
                 }
             );
