@@ -21,12 +21,14 @@ namespace TigerPawCodeAPI.Controllers
         private readonly IUserService _userService;
         private readonly IUserProfileService _userProfileService;
         private readonly IErrorHandler _errorHandler;
+        private readonly IProfileService _profileService;
 
-        public ProfileController(IUserService userService, IUserProfileService userProfileService, IErrorHandler errorHandler)
+        public ProfileController(IUserService userService, IUserProfileService userProfileService, IErrorHandler errorHandler, IProfileService profileService)
         {
             _userService = userService ?? throw new NotImplementedException(nameof(userService));
             _userProfileService = userProfileService ?? throw new NotImplementedException(nameof(userProfileService));
             _errorHandler = errorHandler ?? throw new NotImplementedException(nameof(errorHandler));
+            _profileService = profileService;
         }
 
         [HttpPost("update")]
@@ -46,6 +48,21 @@ namespace TigerPawCodeAPI.Controllers
 
                 // throw exception if we have reached here as one of the models within the contract hasnt been updated
                 throw new Exception("Model within the ProfileContract has failed to update");
+            }
+            catch (AppException ex)
+            {
+                _errorHandler.CaptureAsync(ex);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProfileContract(int id)
+        {
+            try
+            {
+                var profileContract = _profileService.GetProfileContractByUserId(id);
+                return Ok(profileContract);
             }
             catch (AppException ex)
             {

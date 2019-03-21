@@ -8,7 +8,7 @@ abstract class BlogItemBase {
   promoted: boolean;
   content: string;
   thumbnail: string;
-  author: string;
+  userId: number;
   dateLive?: Date;
   tags?: string[];
   dateDeleted?: Date;

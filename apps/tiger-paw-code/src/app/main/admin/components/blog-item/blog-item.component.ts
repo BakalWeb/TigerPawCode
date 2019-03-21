@@ -7,6 +7,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import { NotificationService } from '@core/services/notification.service';
 import { Location } from '@angular/common';
+import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-blog-item',
   templateUrl: './blog-item.component.html',
@@ -25,6 +26,7 @@ export class BlogItemComponent implements OnInit {
     private ngZone: NgZone,
     private notificationService: NotificationService,
     private location: Location,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -59,6 +61,12 @@ export class BlogItemComponent implements OnInit {
   }
 
   initializeBlogItemForm(): void {
+
+    // get user
+    if (!this.blogItemForm.userId) {
+      this.blogItemForm.userId = this.authService.getUserLogin().id;
+      console.log(this.blogItemForm.userId);
+    }
     this.blogForm = this.formBuilder.group({
       headline: [this.blogItemForm ? this.blogItemForm.headline : ''],
       shortDescription: [this.blogItemForm ? this.blogItemForm.shortDescription : ''],
@@ -67,7 +75,7 @@ export class BlogItemComponent implements OnInit {
       promoted: [this.blogItemForm ? this.blogItemForm.promoted : false],
       content: [this.blogItemForm ? this.blogItemForm.content : ''],
       thumbnail: [this.blogItemForm ? this.blogItemForm.thumbnail : ''],
-      author: [this.blogItemForm ? this.blogItemForm.author : 'Adam Bakal'],
+      userId: [this.blogItemForm.userId],
       dateLive: [
         this.blogItemForm && this.blogItemForm.dateLive
           ? this.blogItemForm.dateLive

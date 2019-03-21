@@ -10,6 +10,7 @@ namespace TigerPawCodeAPI.Infrastructure.Helpers
         {
             CreateMap<User, UserContract>();
             CreateMap<UserContract, User>();
+            
         }
     }
 }

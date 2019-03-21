@@ -25,6 +25,10 @@ export class ProfileService {
     return this.http.post<ProfileContract>(`${this.apiUrl}/profile/update`, profile);
   }
 
+  public getProfile(profileId: number): Observable<ProfileContract> {
+    return this.http.get<ProfileContract>(`${this.apiUrl}/profile/${profileId}`);
+  }
+
   public updateAvatar(file: File): Observable<string> {
     // create form data from file
     const formData = new FormData();

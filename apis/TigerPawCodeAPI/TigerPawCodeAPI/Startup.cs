@@ -103,6 +103,7 @@ namespace TigerPawCodeAPI
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IProfileService, ProfileService>();
 
             // swagger
             services.AddSwaggerGen(c =>

@@ -26,7 +26,11 @@ namespace TigerPawCodeAPI.Models
 
         public string Thumbnail { get; set; }
 
-        public string Author { get; set; }
+        //public string Author { get; set; }
+
+        public int UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         public DateTime? DateLive { get; set; }
 

@@ -64,7 +64,7 @@ export const Blogs: BlogItem[] = [
          Etiam hendrerit in est ut mattis.</p>
 `,
     thumbnail: 'https://www.fillmurray.com/g/140/100',
-    author: 'Adam Bakal',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -133,7 +133,7 @@ export const Blogs: BlogItem[] = [
          Etiam hendrerit in est ut mattis.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Jesus',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -202,7 +202,7 @@ export const Blogs: BlogItem[] = [
          Etiam hendrerit in est ut mattis.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -217,7 +217,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -232,7 +232,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -247,7 +247,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -262,7 +262,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -277,7 +277,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -292,7 +292,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -307,7 +307,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -322,7 +322,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   },
   {
@@ -337,7 +337,7 @@ export const Blogs: BlogItem[] = [
     <p>Loads of stuff and tingalings.</p>
 `,
     thumbnail: 'https://via.placeholder.com/150',
-    author: 'Tom Singleton',
+    userId: 1,
     dateLive: new Date()
   }
 ];
